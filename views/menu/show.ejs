@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<%- include('../partials/navbar.ejs') %>
+
+<body>
+  <img src=<%= drink.image  %> alt="" style='height:400px'> 
+  <div>
+    <%= drink.drinkName  %> 
+  </div>
+  <div>
+    <%= drink.description  %> 
+  </div>
+  <div>
+    Starting at <%= drink.price  %> 
+  </div>
+  <form action="/menu/<%=drink._id%>" method="POST">
+
+    <div>
+      <label class="form-label" for="size">Choose your Size</label>
+      <select class="form-control" type="text" id="" name="" required>
+          <option selected value="Regular">Regular</option>
+          <option value="Large">Large +0.69</option>
+          <option value="Jumbo">Jumbo +1.69</option>
+      </select>
+  </div>
+
+  <div>
+    <label class="form-label" for="sugarLevel">Choose your Sugar Level</label>
+    <select class="form-control" type="text" id="" name="" required>
+        <option selected value="100%">100%</option>
+        <option value="80%">80%</option>
+        <option value="50%">50%</option>
+        <option value="30%">30%</option>
+        <option value="0%">0%</option>
+    </select>
+</div>
+
+<div>
+  <label class="form-label" for="iceLevel">Choose your Ice Level</label>
+  <select class="form-control" type="text" id="" name="" required>
+      <option selected value="Regular Ice">Regular Ice</option>
+      <option value="Less Ice">Less Ice</option>
+      <option value="Extra Ice">Extra Ice</option>
+      <option value="No Ice">No Ice</option>
+  </select>
+</div>
+
+<div>
+  <label class="form-label" for="milkType">Choose your Milk</label>
+  <select class="form-control" type="text" id="" name="" required>
+      <option selected value="2% Milk">2% Milk</option>
+      <option value="Oat Milk">Oat Milk +0.65</option>
+      <option value="Soy Milk">Soy Milk +0.65</option>
+      <option value="Almond Milk">Almond Milk +0.65</option>
+  </select>
+</div>
+
+<div>
+  <label class="form-label" for="iceLevel">Choose your Topping</label>
+  <select class="form-control" type="text" id="" name="" required>
+      <option selected value="None">None</option>
+      <option value="Pearls">Pearls +0.80</option>
+      <option value="Brown Sugar Pearls">Brown Sugar Pearls +0.80</option>
+      <option value="Grass Jelly">Grass Jelly +0.80</option>
+      <option value="Coconut Jelly">Coconut Jelly +0.80</option>
+      <option value="Pudding">Pudding +0.80</option>
+  </select>
+</div>
+
+    <button>Add to Order</button>
+  </form>
+</body>
+</html>
