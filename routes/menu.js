@@ -17,25 +17,46 @@ router.get('/:drinkId', async (req, res) => {
 });
 
 router.post('/:drinkId', async (req, res) => {
-const id = req.session.user_id;
-let cart = await Cart.findOne({id})
-const { drinkId } = req.params;
-const drink = await Menu.findById(drinkId)
-console.log('id', id)
-cart.cartItems.push({
-  drinkName: drink.drinkName,
-  quantity: req.body.quantity,
-  size: req.body.size,
-  sugarLevel: req.body.sugarLevel,
-  iceLevel: req.body.iceLevel,
-  milkType: req.body.milkType,
-  topping: req.body.topping,
-  price: drink.price,
-  image: drink.image
-})
-console.log('cart.cartItems', cart.cartItems)
-await cart.save()
-  res.send('added to cart')
+  const id = req.session.user_id;
+  const { drinkId } = req.params;
+  const drink = await Menu.findById(drinkId)
+  let cart = await Cart.findOne({ customerId: id })
+  if (cart) {
+    cart.cartItems.push({
+      drinkName: drink.drinkName,
+      quantity: req.body.quantity,
+      size: req.body.size,
+      sugarLevel: req.body.sugarLevel,
+      iceLevel: req.body.iceLevel,
+      milkType: req.body.milkType,
+      topping: req.body.topping,
+      price: drink.price,
+      image: drink.image
+    })
+    await cart.save()
+    console.log('cart', cart)
+    res.redirect('/menu')
+  } else {
+    const newCart = await Cart.create({
+      customerId: id,
+      cartItems: [
+        {
+          drinkName: drink.drinkName,
+          quantity: req.body.quantity,
+          size: req.body.size,
+          sugarLevel: req.body.sugarLevel,
+          iceLevel: req.body.iceLevel,
+          milkType: req.body.milkType,
+          topping: req.body.topping,
+          price: drink.price,
+          image: drink.image
+        }
+      ]
+    })
+    console.log('cart2', newCart)
+    res.redirect('/menu')
+
+  }
 });
 
 module.exports = router;

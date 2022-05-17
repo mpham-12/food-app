@@ -2,10 +2,11 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const User = require('../models/users');
+const cart = require('../models/cart');
 
 router.get('/register', (req, res) => {
 	const id = req.session.user_id;
-	res.render('users/register', {id});
+	res.render('users/register', { id });
 });
 
 router.post('/register', async (req, res) => {
@@ -27,12 +28,12 @@ router.post('/register', async (req, res) => {
 
 router.get('/login', (req, res) => {
 	const id = req.session.user_id;
-	res.render('users/login', {id});
+	res.render('users/login', { id });
 });
 
 router.post('/login', async (req, res) => {
-	const { username, password } = req.body;
-	const user = await User.findOne({ username: username });
+	const { email, password } = req.body;
+	const user = await User.findOne({ email: email });
 	//bcrypt method to compare req.body.password to the actual hashed user password in the db
 	//this returns true or false
 	const validPassword = await bcrypt.compare(password, user.password);
@@ -50,5 +51,11 @@ router.post('/logout', (req, res) => {
 	req.session.user_id = null;
 	res.redirect('/');
 });
+
+// router.get('/cart', async (req, res) => {
+// 	const id = req.session.user_id;
+// 	const cart = await Cart.findById(id)
+// res.render('users/cart', {cart})
+// })
 
 module.exports = router;
