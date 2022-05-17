@@ -12,10 +12,12 @@ router.post('/register', async (req, res) => {
 	const { firstName, lastName, email, password } = req.body;
 	const hashedPassword = await bcrypt.hash(password, 12);
 	const user = new User({
-		username,
+		firstName,
+		lastName,
 		email,
 		password: hashedPassword
 	});
+	console.log(req.body)
 	await user.save();
 	// apply session to user id so that the user
 	// does not need to log in seperately after registering
@@ -24,7 +26,7 @@ router.post('/register', async (req, res) => {
 });
 
 router.get('/login', (req, res) => {
-  const id = req.session.user_id;
+	const id = req.session.user_id;
 	res.render('users/login', {id});
 });
 
@@ -44,7 +46,6 @@ router.post('/login', async (req, res) => {
 });
 
 router.post('/logout', (req, res) => {
-	const id = req.session.user_id;
 	req.session.user_id = null;
 	res.redirect('/');
 });

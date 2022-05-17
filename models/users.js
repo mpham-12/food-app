@@ -19,10 +19,6 @@ const UserSchema = new Schema({
 		type: String,
 		required: true
 	},
-	phoneNumber: {
-		type: Number,
-		required: true
-	},
 	previousOrders: [
 		{
 			type: Schema.Types.Mixed,
@@ -30,3 +26,5 @@ const UserSchema = new Schema({
 		}
 	]
 });
+
+module.exports = mongoose.model('User', UserSchema);

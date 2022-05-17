@@ -1,7 +1,14 @@
 <nav>
   <a href="/">Milkies</a>
-  <a href="/">Login</a>
+
   <a href="/">Admin</a>
   <a href="/menu">Menu</a>
-  <a href="/">Checkout</a>
+  <a href="/">Cart</a>
+  <%if(!id){%>
+    <a href="/user/login">Login</a>
+    <%} else {%>
+      <form action="/user/logout" method="POST">
+        <button>Logout</button>
+      </form>
+      <%}%>
 </nav>

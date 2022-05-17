@@ -43,7 +43,7 @@ app.use(bodyParser.json());
 // import routers
 const homeRoute = require('./routes/home.js');
 const menuRoute = require('./routes/menu.js');
-const userRoute = require('./routes/menu.js')
+const userRoute = require('./routes/user.js')
 
 //pass routers to express as middleware
 app.use('/', homeRoute);
