@@ -40,6 +40,7 @@ router.post('/login', async (req, res) => {
 		// save user id to session if successfully logged in
 		req.session.user_id = user._id;
 		res.redirect('/');
+		console.log('logged in as:', user)
 	} else {
 		res.redirect('/user/login');
 	}
