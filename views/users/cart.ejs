@@ -7,9 +7,44 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
+<script>
 
+</script>
 <body>
-  <h1>hi</h1>
+  <h1>Cart</h1>
+  <h2>Review your order</h2>
+  <% for (let item of cartItems) {%>
+    <div>
+
+      <div><img src=<%=item.image%> alt="" style="height:150px"></div>
+      <%=item.quantity%>x <%=item.drinkName%>
+          <ul>
+            <li>
+              <%=item.size%>
+            </li>
+            <li>
+              <%=item.topping%>
+            </li>
+            <li>
+              <%=item.sugarLevel%> Sugar
+            </li>
+            <li>
+              <%=item.iceLevel%>
+            </li>
+
+            <li>
+              <% const total = (item.price )* item.quantity%>
+              <%=total%>
+            </li>
+          </ul>
+
+    </div>
+    <%}%>
 </body>
+<script>
+  if (size === 'Large') {
+    item.price += 0.69
+  }
+</script>
 
 </html>

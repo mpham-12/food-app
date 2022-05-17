@@ -2,7 +2,13 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const User = require('../models/users');
-const cart = require('../models/cart');
+const Cart = require('../models/cart');
+
+router.get('/', async (req, res) => {
+	const id = req.session.user_id;
+const user = await User.findById(id)
+res.render('users/account', {user})
+})
 
 router.get('/register', (req, res) => {
 	const id = req.session.user_id;
@@ -52,10 +58,13 @@ router.post('/logout', (req, res) => {
 	res.redirect('/');
 });
 
-// router.get('/cart', async (req, res) => {
-// 	const id = req.session.user_id;
-// 	const cart = await Cart.findById(id)
-// res.render('users/cart', {cart})
-// })
+router.get('/cart', async (req, res) => {
+	const id = req.session.user_id;
+	const cart = await Cart.find({ customerId: id })
+	const cartItems = cart[0].cartItems
+	console.log(id)
+	console.log('cart', cart[0].cartItems)
+	res.render('users/cart', { cartItems })
+})
 
 module.exports = router;
