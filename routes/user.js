@@ -6,9 +6,9 @@ const Cart = require('../models/cart');
 
 router.get('/', async (req, res) => {
 	const id = req.session.user_id;
-const user = await User.findById(id)
-res.render('users/account', {user})
-})
+	const user = await User.findById(id);
+	res.render('users/account', { user });
+});
 
 router.get('/register', (req, res) => {
 	const id = req.session.user_id;
@@ -24,7 +24,7 @@ router.post('/register', async (req, res) => {
 		email,
 		password: hashedPassword
 	});
-	console.log(req.body)
+	console.log(req.body);
 	await user.save();
 	// apply session to user id so that the user
 	// does not need to log in seperately after registering
@@ -46,25 +46,36 @@ router.post('/login', async (req, res) => {
 	if (validPassword) {
 		// save user id to session if successfully logged in
 		req.session.user_id = user._id;
+		const userId = req.session.user_id
+		const cart = await Cart.find({ customerId: userId });
 		res.redirect('/');
-		console.log('logged in as:', user)
+		console.log('logged in as:', user);
+		console.log('USER CART', cart);
 	} else {
 		res.redirect('/user/login');
 	}
+});
+
+router.get('/cart', async (req, res) => {
+	const id = req.session.user_id;
+	const user = await User.findById(id)
+	const cart = await Cart.find({ customerId: id });
+		if (id && cart.length===0){
+		res.render('users/cart', { cart, id, user });
+	}
+	if (id && cart){
+		const cartItems = cart[0].cartItems;
+		res.render('users/cart', { cart, cartItems, id, user });
+	}
+	if (!id) {
+		res.render('users/cart', { cart, id, user });
+	}
+
 });
 
 router.post('/logout', (req, res) => {
 	req.session.user_id = null;
 	res.redirect('/');
 });
-
-router.get('/cart', async (req, res) => {
-	const id = req.session.user_id;
-	const cart = await Cart.find({ customerId: id })
-	const cartItems = cart[0].cartItems
-	console.log(id)
-	console.log('cart', cart[0].cartItems)
-	res.render('users/cart', { cartItems })
-})
 
 module.exports = router;

@@ -10,36 +10,48 @@
 <script>
 
 </script>
+
 <body>
   <h1>Cart</h1>
-  <h2>Review your order</h2>
-  <% for (let item of cartItems) {%>
-    <div>
+  <% if (!id) {%>
+    <h2>Empty bag. Please log in to place an order</h2>
+    <% } %>  
 
-      <div><img src=<%=item.image%> alt="" style="height:150px"></div>
-      <%=item.quantity%>x <%=item.drinkName%>
-          <ul>
-            <li>
-              <%=item.size%>
-            </li>
-            <li>
-              <%=item.topping%>
-            </li>
-            <li>
-              <%=item.sugarLevel%> Sugar
-            </li>
-            <li>
-              <%=item.iceLevel%>
-            </li>
+    <% if (id && cart.length===0) {%>
+      <h3> Hi <%=user.firstName %>, your cart is empty. </h3>
+      <% } %>  
 
-            <li>
-              <% const total = (item.price )* item.quantity%>
-              <%=total%>
-            </li>
-          </ul>
+      <% if (id && cart.length>0) {%> 
+      <h2>Review your order</h2>
+      <% for (let item of cartItems) {%>
+        <div>
 
-    </div>
-    <%}%>
+          <div><img src=<%=item.image%> alt="" style="height:150px"></div>
+          <%=item.quantity%>x <%=item.drinkName%>
+              <ul>
+                <li>
+                  <%=item.size%>
+                </li>
+                <li>
+                  <%=item.topping%>
+                </li>
+                <li>
+                  <%=item.sugarLevel%> Sugar
+                </li>
+                <li>
+                  <%=item.iceLevel%>
+                </li>
+
+                <li>
+                  <% const total=(item.price )* item.quantity%>
+                    <%=total%>
+                </li>
+              </ul>
+
+        </div>
+        <%}%>
+        <%}%>
+        
 </body>
 <script>
   if (size === 'Large') {
