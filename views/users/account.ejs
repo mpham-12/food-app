@@ -7,10 +7,14 @@
   <title>Document</title>
 </head>
 <body>
+  <%- include('../partials/navbar.ejs') %>
+
   <h1>My Account :-)</h1>
-  <%= user.firstName%>
-  <%= user.lastName%>
-  <%= user.email%>
-  <%= user.previousOrders%>
+  <div>  First Name: <%= user.firstName%></div>
+  <div>  Last Name: <%= user.lastName%></div>
+  <div>  Phone Number: <%= user.phoneNumber%></div>
+  <div>  Email: <%= user.email%></div>
+  <div>  Previous Orders: <%= user.previousOrders%></div>
+
 </body>
 </html>

@@ -7,7 +7,10 @@ const Cart = require('../models/cart');
 router.get('/', async (req, res) => {
 	const id = req.session.user_id;
 	const user = await User.findById(id);
-	res.render('users/account', { user });
+	if (!user) {
+		res.redirect('/user/login')
+	} else
+	res.render('users/account', { user, id });
 });
 
 router.get('/register', (req, res) => {
