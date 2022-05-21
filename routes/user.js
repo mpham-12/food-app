@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const User = require('../models/users');
 const Cart = require('../models/cart');
+const Menu = require('../models/menu');
 
 router.get('/', async (req, res) => {
 	const id = req.session.user_id;
@@ -10,7 +11,14 @@ router.get('/', async (req, res) => {
 	if (!user) {
 		res.redirect('/user/login')
 	} else
-	res.render('users/account', { user, id });
+		res.render('users/account', { user, id });
+});
+
+router.put('/', async (req, res) => {
+	const id = req.session.user_id;
+	const updateFirstName = await User.findByIdAndUpdate(id, { $set: { firstName: req.body.firstName } });
+	console.log('UPDATED FORSTNAME', updateFirstName)
+	res.send('updated first name')
 });
 
 router.get('/register', (req, res) => {
@@ -63,11 +71,12 @@ router.get('/cart', async (req, res) => {
 	const id = req.session.user_id;
 	const user = await User.findById(id)
 	const cart = await Cart.find({ customerId: id });
-		if (id && cart.length===0){
+	if (id && cart.length === 0) {
 		res.render('users/cart', { cart, id, user });
 	}
-	if (id && cart){
+	if (id && cart) {
 		const cartItems = cart[0].cartItems;
+		console.log('CART-----', cartItems)
 		res.render('users/cart', { cart, cartItems, id, user });
 	}
 	if (!id) {
@@ -75,6 +84,19 @@ router.get('/cart', async (req, res) => {
 	}
 
 });
+
+router.delete('/cart', async (req, res) => {
+	const id = req.session.user_id;
+	const user = await User.findById(id);
+	const cart = await Cart.find({ customerId: id });
+
+	Cart.findOneAndDelete(cart[0].cartItems[0]._id)
+	// for (drink of cart[0].cartItems) {
+	// 	const drinkName = drink.drinkName;
+	// 	console.log(drink._id)
+	// }
+	// console.log(cart[0].cartItems._id)
+})
 
 router.post('/logout', (req, res) => {
 	req.session.user_id = null;

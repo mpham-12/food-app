@@ -1,20 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Milkies</title>
+
 </head>
+
 <body>
   <%- include('../partials/navbar.ejs') %>
+  <button id="edit-name">EDIT</button>
+  <div id="first_name"> First Name: <%= user.firstName%>
+  </div>
 
-  <h1>My Account :-)</h1>
-  <div>  First Name: <%= user.firstName%></div>
-  <div>  Last Name: <%= user.lastName%></div>
-  <div>  Phone Number: <%= user.phoneNumber%></div>
-  <div>  Email: <%= user.email%></div>
-  <div>  Previous Orders: <%= user.previousOrders%></div>
+  <form action="/user?_method=PUT" method="POST">
+
+  <div id="first_name_input">
+  <input type="text" name="firstName" id="firstName">
+  <button class="update-name" type="submit">Update</button>
+  <div id="error-message-name"></div>
+</div>
+
+</form>
+
+    </form>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="/scripts/profile.js"></script>
 
 </body>
+
+
+
 </html>
