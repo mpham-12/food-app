@@ -18,7 +18,7 @@ router.put('/', async (req, res) => {
 	const id = req.session.user_id;
 	const updateFirstName = await User.findByIdAndUpdate(id, { $set: { firstName: req.body.firstName } });
 	console.log('UPDATED FORSTNAME', updateFirstName)
-	res.send('updated first name')
+	res.status(201).send();
 });
 
 router.get('/register', (req, res) => {
