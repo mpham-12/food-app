@@ -11,19 +11,46 @@
 
 <body>
   <%- include('../partials/navbar.ejs') %>
-  <button id="edit-name">EDIT</button>
+  <h1>profile</h1>
   <div id="first_name"> First Name: <%= user.firstName%>
   </div>
+  <button id="edit-first_name">EDIT</button>
 
   <form action="/user?_method=PUT" method="POST">
 
   <div id="first_name_input">
   <input type="text" name="firstName" id="firstName" required>
-  <button class="update-name" type="button">Update</button>
+  <button class="update-first_name" type="button">Update</button>
   <div id="error-message-name"></div>
 </div>
 
+<div>
+<div id="last_name"> Last Name: <%= user.lastName%>
+</div>
+<button id="edit-last_name">EDIT</button>
+
+<div id="last_name_input">
+  <input type="text" name="lastName" id="lastName" required>
+  <button class="update-last_name" type="button">Update</button>
+  <div id="error-message-name"></div>
+</div>
+</div>
+
+<div>
+  <div id="phone-number"> Phone Number: <%= user.phoneNumber%>
+  </div>
+  <button id="edit-phone_number">EDIT</button>
+  
+  <div id="phone-number_input">
+    <input type="text" name="phoneNumber" id="phoneNumber" required>
+    <button class="update-phone_number" type="button">Update</button>
+    <div id="error-message-name"></div>
+  </div>
+  </div>
+
 </form>
+
+Email: <%= user.email%>
 
     </form>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>

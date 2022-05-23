@@ -16,8 +16,21 @@ router.get('/', async (req, res) => {
 
 router.put('/', async (req, res) => {
 	const id = req.session.user_id;
-	const updateFirstName = await User.findByIdAndUpdate(id, { $set: { firstName: req.body.firstName } });
-	console.log('UPDATED FORSTNAME', updateFirstName)
+	const newFirstName = req.body.firstName
+	const newLastName = req.body.lastName
+	const newNumber = req.body.phoneNumber
+
+	if (!newLastName && !newNumber && newFirstName.length >= 1) {
+		const updateFirstName = await User.findByIdAndUpdate(id, { $set: { firstName: newFirstName } });
+	}
+
+	if (!newFirstName && !newNumber && newLastName.length >= 1) {
+		const updateLastName = await User.findByIdAndUpdate(id, { $set: { lastName: newLastName } });
+	}
+	if (!newFirstName && !newLastName && newNumber.length >= 1) {
+		const updateNumber = await User.findByIdAndUpdate(id, { $set: { phoneNumber: newNumber } });
+
+	}
 	res.status(201).send();
 });
 
@@ -27,12 +40,13 @@ router.get('/register', (req, res) => {
 });
 
 router.post('/register', async (req, res) => {
-	const { firstName, lastName, email, password } = req.body;
+	const { firstName, lastName, email, phoneNumber, password } = req.body;
 	const hashedPassword = await bcrypt.hash(password, 12);
 	const user = new User({
 		firstName,
 		lastName,
 		email,
+		phoneNumber,
 		password: hashedPassword
 	});
 	console.log(req.body);
