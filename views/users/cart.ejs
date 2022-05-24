@@ -59,7 +59,12 @@
                 <%}%>
                   <%}%>
 
-                    <button>Go to checkout</button>
+                  <%if (cart.length<1){%>
+                    <button>Go to menu</button>
+                    <%} else {%>
+                      <button>Go to checkout</button>
+                      <%}%>
+
 </body>
 <script>
   if (size === 'Large') {

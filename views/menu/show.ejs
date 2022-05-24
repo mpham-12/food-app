@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Milkies</title>
 </head>
 <%- include('../partials/navbar.ejs') %>
 
@@ -19,19 +19,20 @@
   <div>
     Starting at <%= drink.price  %> 
   </div>
+
   <form action="/menu/<%=drink._id%>" method="POST">
 
 <div>
   <label class="form-label" for="qty">Qty</label>
-  <input type="number" id="quantity" name="quantity">
+  <input class="calculate" type="number" id="quantity" name="quantity" min="1" value="1">
 </div>
 
-    <div>
+    <div class="size">
       <label class="form-label" for="size">Choose your Size</label>
-      <select class="form-control" type="text" id="size" name="size" required>
-          <option selected value="Regular">Regular</option>
-          <option value="Large">Large +0.69</option>
-          <option value="Jumbo">Jumbo +1.69</option>
+      <select class="form-control calculate" type="text" id="size" name="size" required>
+          <option data-price="0" selected value="Regular">Regular</option>
+          <option data-price="0.69" value="Large">Large +0.69</option>
+          <option data-price="1.69" value="Jumbo">Jumbo +1.69</option>
       </select>
   </div>
 
@@ -58,27 +59,33 @@
 
 <div>
   <label class="form-label" for="milkType">Choose your Milk</label>
-  <select class="form-control" type="text" id="milkType" name="milkType" required>
-      <option selected value="2% Milk">2% Milk</option>
-      <option value="Oat Milk">Oat Milk +0.65</option>
-      <option value="Soy Milk">Soy Milk +0.65</option>
-      <option value="Almond Milk">Almond Milk +0.65</option>
+  <select class="form-control calculate" type="text" id="milkType" name="milkType" required>
+      <option data-price="0" selected value="2% Milk">2% Milk</option>
+      <option data-price="0.65" value="Oat Milk">Oat Milk +0.65</option>
+      <option data-price="0.65" value="Soy Milk">Soy Milk +0.65</option>
+      <option data-price="0.65" value="Almond Milk">Almond Milk +0.65</option>
   </select>
 </div>
 
 <div>
   <label class="form-label" for="iceLevel">Choose your Topping</label>
-  <select class="form-control" type="text" id="topping" name="topping" required>
-      <option selected value="None">None</option>
-      <option value="Pearls">Pearls +0.80</option>
-      <option value="Brown Sugar Pearls">Brown Sugar Pearls +0.80</option>
-      <option value="Grass Jelly">Grass Jelly +0.80</option>
-      <option value="Coconut Jelly">Coconut Jelly +0.80</option>
-      <option value="Pudding">Pudding +0.80</option>
+  <select class="form-control calculate" type="text" id="topping" name="topping" required>
+      <option data-price="0" selected value="None">None</option>
+      <option data-price="0.8" value="Pearls">Pearls +0.80</option>
+      <option data-price="0.8" value="Brown Sugar Pearls">Brown Sugar Pearls +0.80</option>
+      <option data-price="0.8" value="Grass Jelly">Grass Jelly +0.80</option>
+      <option data-price="0.8" value="Coconut Jelly">Coconut Jelly +0.80</option>
+      <option data-price="0.8" value="Pudding">Pudding +0.80</option>
   </select>
 </div>
 
+
+<p id="total-price">Total: <%=drink.price%></p>
+
     <button>Add to Order</button>
   </form>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="/scripts/menuShow.js"></script>
 </body>
 </html>
