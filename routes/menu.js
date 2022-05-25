@@ -30,11 +30,10 @@ router.post('/:drinkId', async (req, res) => {
       iceLevel: req.body.iceLevel,
       milkType: req.body.milkType,
       topping: req.body.topping,
-      price: drink.price,
+      // price: drink.price,
       image: drink.image
     })
     await cart.save()
-    console.log('cart', cart)
     res.redirect('/menu')
   } else {
     const newCart = await Cart.create({
@@ -48,12 +47,11 @@ router.post('/:drinkId', async (req, res) => {
           iceLevel: req.body.iceLevel,
           milkType: req.body.milkType,
           topping: req.body.topping,
-          price: drink.price,
+          // price: drink.price
           image: drink.image
         }
       ]
     })
-    console.log('cart2', newCart)
     res.redirect('/menu')
 
   }
