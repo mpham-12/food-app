@@ -60,4 +60,31 @@ router.post('/:drinkId', async (req, res) => {
   }
 });
 
+router.get('/:drinkId/edit', async (req, res) => {
+  const id = req.session.user_id;
+  const { drinkId } = req.params;
+  const user = await User.findById(id);
+  const drink = await Menu.findById(drinkId);
+  if (id && user.isAdmin) {
+    console.log('DRINK--------', drink)
+	res.render('admin/edit', {drink});
+  } else {
+    res.send('you cannot perform this action')
+  }
+});
+
+router.put('/:drinkId/edit', async (req, res) => {
+  const id = req.session.user_id;
+  const { drinkId } = req.params;
+  const user = await User.findById(id);
+  const drink = await Menu.findById(drinkId);
+  if (id && user.isAdmin) {
+    await Menu.findByIdAndUpdate(drinkId, { ...req.body });
+    await drink.save();
+	res.redirect('menu/:drinkId', {drink});
+  } else {
+    res.send('you cannot perform this action')
+  }
+});
+
 module.exports = router;
