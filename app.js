@@ -43,14 +43,16 @@ app.use(bodyParser.json());
 // import routers
 const homeRoute = require('./routes/home.js');
 const menuRoute = require('./routes/menu.js');
-const userRoute = require('./routes/user.js')
+const userRoute = require('./routes/user.js');
+const adminRoute = require('./routes/admin.js');
 
 //pass routers to express as middleware
 app.use('/', homeRoute);
 app.use('/menu', menuRoute)
 app.use('/user', userRoute);
+app.use('/admin', adminRoute);
 
 // listening for port connection
 app.listen(PORT, () => {
-  console.log(`SERVING ON PORT ${PORT}`)
+  console.log(`SERVING ON PORT ${PORT}`);
 })

@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const bcrypt = require('bcrypt');
+const SALT = 10;
+
 
 const UserSchema = new Schema({
 	firstName: {
@@ -20,7 +23,11 @@ const UserSchema = new Schema({
 		required: true
 	},
 	phoneNumber: {
-		type: String,
+		type: String
+	},
+	isAdmin: {
+		type: Boolean,
+		default: false
 	},
 	previousOrders: [
 		{

@@ -1,13 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const User = require('../models/users');
 
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
   const id = req.session.user_id;
-  res.render('home', {id});
+  const user = await User.findById(id);
+  res.render('home', {id, user});
 });
-
-router.get('/admin', (req, res) => {
-  res.send('i admin')
-})
 
 module.exports = router;

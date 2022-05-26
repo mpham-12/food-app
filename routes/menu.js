@@ -2,18 +2,21 @@ const express = require('express');
 const router = express.Router();
 const Menu = require('../models/menu')
 const Cart = require('../models/cart')
+const User = require('../models/users')
 
 router.get('/', async (req, res) => {
   const id = req.session.user_id;
+  const user = await User.findById(id);
   const menuItems = await Menu.find();
-  res.render('menu', { menuItems, id });
+  res.render('menu', { menuItems, id, user });
 });
 
 router.get('/:drinkId', async (req, res) => {
   const id = req.session.user_id;
+  const user = await User.findById(id);
   const { drinkId } = req.params;
   const drink = await Menu.findById(drinkId)
-  res.render('menu/show', { drink, id });
+  res.render('menu/show', { drink, id, user });
 });
 
 router.post('/:drinkId', async (req, res) => {

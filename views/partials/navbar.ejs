@@ -1,7 +1,8 @@
 <nav>
   <a href="/">Milkies</a>
-
+<% if (id && user.isAdmin){ %> 
   <a href="/admin">Admin</a>
+  <% } %> 
   <a href="/menu">Menu</a>
   <a href="/user/cart">Cart</a>
   <a href="/user">My Account</a>

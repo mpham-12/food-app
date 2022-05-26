@@ -7,11 +7,12 @@ const Menu = require('../models/menu');
 
 router.get('/', async (req, res) => {
 	const id = req.session.user_id;
+	const admin = await User.find({admin: true});
 	const user = await User.findById(id);
 	if (!user) {
 		res.redirect('/user/login')
 	} else
-		res.render('users/account', { user, id });
+		res.render('users/account', { user, id, admin });
 });
 
 router.put('/', async (req, res) => {
