@@ -80,7 +80,7 @@ router.get('/:drinkId/edit', async (req, res) => {
 	}
 });
 
-router.put('/:drinkId/edit', async (req, res) => {
+router.post('/:drinkId/edit', async (req, res) => {
 	const id = req.session.user_id;
 	const { drinkId } = req.params;
 	const user = await User.findById(id);
@@ -88,7 +88,7 @@ router.put('/:drinkId/edit', async (req, res) => {
 	if (id && user.isAdmin) {
 		await Menu.findByIdAndUpdate(drinkId, { ...req.body });
 		await drink.save();
-		res.redirect('menu/:drinkId', { drink });
+		res.redirect(`/menu/${drink._id}`);
 	} else {
 		res.send('you cannot perform this action');
 	}
