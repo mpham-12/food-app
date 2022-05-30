@@ -1,16 +1,24 @@
 <nav>
-  <a href="/">Milkies</a>
-<% if (id && user.isAdmin){ %> 
-  <a href="/admin">Admin</a>
-  <% } %> 
-  <a href="/menu">Menu</a>
-  <a href="/user/cart">Cart</a>
-  <a href="/user">My Account</a>
-  <%if(!id){%>
-    <a href="/user/login">Login</a>
-    <%} else {%>
-      <form action="/user/logout" method="POST">
-        <button>Logout</button>
-      </form>
-      <%}%>
+  <div class="section">
+    <a class="nav-link" href="/menu">MENU</a>
+  </div>
+  
+  <div class="section section-logo">
+  <a href="/"><img class='navbar-logo' src="/images/logo.png" alt=""></a>
+</div>
+
+  <div class="section section-end">
+    <a class="nav-link" href="/user/cart">CART</a>
+    <a class="nav-link" href="/user">MY ACCOUNT</a>
+    <% if (id && user.isAdmin){ %> 
+      <a class="nav-link" href="/admin">ADMIN</a>
+    <% } %> 
+    <%if(!id){%>
+      <a class="nav-link" href="/user/login">LOGIN</a>
+      <%} else {%>
+        <form action="/user/logout" method="POST">
+          <button>Logout</button>
+        </form>
+        <%}%>
+      </div>
 </nav>

@@ -5,19 +5,23 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <link rel="stylesheet" href="/styles/navbar.css">
+  <link rel="stylesheet" href="/styles/register.css">
+
   <title>Milkies</title>
 
 </head>
-<body>
+<body class="register-body">
   <%- include('../partials/navbar.ejs') %>
-<container class="register-body">
+<container>
 <form action="/user/register" method="POST">
   <h2>Register</h2>
-  <input type="text" placeholder="FIRST NAME" name="firstName" id="firstName">
-  <input type="text" placeholder="LAST NAME" name="lastName" id="lastName">
-  <input type="text" placeholder="PHONE NUMBER" name="phoneNumber" id="phoneNumber">
-  <input type="email" placeholder="EMAIL" name="email" id="email">
-  <input type="password" placeholder="PASSWORD" name="password" id="password">
+  <p>Please fill in the information below:</p>
+  <input type="text" placeholder="First Name" name="firstName" id="firstName">
+  <input type="text" placeholder="Last Name" name="lastName" id="lastName">
+  <input type="text" placeholder="Phone Number" name="phoneNumber" id="phoneNumber">
+  <input type="email" placeholder="Email" name="email" id="email">
+  <input type="password" placeholder="Password" name="password" id="password">
   <button class="create-btn">Create Account</button>
 </form>
 </container>

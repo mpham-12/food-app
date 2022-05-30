@@ -32,7 +32,6 @@ const MenuSchema = new Schema({
 	},
 	price: {
 		type: Number,
-		enum: [ 4.99, 5.69, 6.69 ],
 		required: true
 	},
 	image: {

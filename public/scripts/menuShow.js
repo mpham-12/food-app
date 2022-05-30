@@ -8,17 +8,8 @@ $(document).ready(function () {
       newPrice += $(this).data('price')
     });
     let total = newPrice * quantity;
-   return $("#total-price").html('Total: ' + total);
+    return $("#total-price").html('Total: ' + total);
 
   })
-
-
-  $.ajax({
-    type: 'POST',
-    data: {data: total},
-    url: location.href.slice(21),                      
-});
-
-
 
 })

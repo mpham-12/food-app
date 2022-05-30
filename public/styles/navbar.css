@@ -1,0 +1,33 @@
+nav{
+  background-color: #f0d42c;
+  padding: 20px 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-logo{
+  height: 80px;
+}
+
+.section{
+padding-top: 20px;
+width: 33%;
+}
+.section-logo{
+padding-top: 0px;
+text-align: center;
+}
+.section-end{
+display:flex; 
+justify-content: end;
+}
+
+
+.nav-link{
+  text-decoration: none;
+  font-size: 18px;
+  color: black;
+  margin-right: 10px;
+}
