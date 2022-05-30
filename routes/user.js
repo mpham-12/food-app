@@ -100,6 +100,16 @@ router.get('/cart', async (req, res) => {
 
 });
 
+router.get('/checkout', async (req, res) => {
+	const id = req.session.user_id;
+	const user = await User.findById(id)
+	const cart = await Cart.find({ customerId: id });
+	const cartItems = cart[0].cartItems;
+
+
+res.render('users/checkout', {user, cartItems, id, cart})
+})
+
 router.delete('/cart', async (req, res) => {
 	const id = req.session.user_id;
 	const user = await User.findById(id);
@@ -111,7 +121,7 @@ router.delete('/cart', async (req, res) => {
 	// 	console.log(drink._id)
 	// }
 	// console.log(cart[0].cartItems._id)
-})
+});
 
 router.post('/logout', (req, res) => {
 	req.session.user_id = null;

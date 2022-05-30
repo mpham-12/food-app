@@ -12,4 +12,14 @@ $(document).ready(function () {
 
   })
 
-})
+
+
+
+  // $.ajax({
+  //   type: "PUT",
+  //   url: "/user",
+  //   data: {
+  //     price: inputName
+  //   },
+  // })
+});

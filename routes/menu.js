@@ -11,9 +11,8 @@ router.get('/', async (req, res) => {
 	res.render('menu', { menuItems, id, user });
 });
 
-router.post('/:drinkId', async (req, res) => {
+router.post('/:drinkId/delete', async (req, res) => {
   const { drinkId } = req.params;
-  
   await Menu.findByIdAndDelete(drinkId);
   res.redirect('/menu')
 });

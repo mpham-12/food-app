@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="/styles/navbar.css">
+
+
+  <title>Milkies</title>
+</head>
+
+<body>
+  <%- include('../partials/navbar.ejs') %>
+
+    <h1>CHECKOUT</h1>
+ 
+
+    <div>Pick up Address: 
+    </div>
+    <div>Milkies
+111 Boba Ave, Vaughan, On, B0B 4V3</div>
+
+
+
+<div>Pick-up estimate 5-15 min(s)</div>
+
+
+Your Items:
+<div>
+<a href="/menu">+ Add Items</a>
+</div>
+
+<% for (let item of cartItems) {%>
+  <div>
+    <%=item.quantity%> 
+    <%=item.drinkName%>
+  </div>
+  <%}%>
+
+<div>Payment Method:</div>
+
+
+<div>Subtotal:</div>
+  
+<div>Taxes:</div>
+  
+<div>Total:</div>
+
+
+
+</body>
+
+</html>

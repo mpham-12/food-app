@@ -1,12 +1,47 @@
 
-    <h1>My Account :-)</h1>
-    <div> Last Name: <%= user.lastName%>
-    </div>
-    <div> Phone Number: <%= user.phoneNumber%>
-    </div>
-    <div> Email: <%= user.email%>
-    </div>
-    <div> Previous Orders: <%= user.previousOrders%>
-    </div>
+                        <li>
+                        <% const total=(item.price )* item.quantity%>
+                          <%=total%>
+                      </li>
+                      <li>
+                          <%=item.price%>
+                      </li>
 
 
+let size = document.querySelector('#size')
+let milk = document.querySelector('#milkType')
+let topping = document.querySelector('#topping')
+let totalPrice = document.querySelector('#total-price')
+
+quantity.addEventListener('change', calculateTotal);
+size.addEventListener('change', calculateTotal);
+milk.addEventListener('change', calculateTotal);
+topping.addEventListener('change', calculateTotal);
+
+var product_price = {}; 
+size_price['Regular'] = 0;
+size_price['Large'] = 0.69;
+size_price['Jumbo'] = 1.69;
+
+let milk_price = {};
+milk_price['2% Milk'] = 0;
+milk_price['Oat Milk'] = 0.65;
+milk_price['Soy Milk'] = 0.65;
+milk_price['Almond Milk'] = 0.65;
+
+let topping_price = {};
+topping_price['None'] = 0;
+topping_price['Pearls'] = 0.8;
+topping_price['Brown Sugar Pearls'] = 0.8;
+topping_price['Grass Jelly'] = 0.8;
+topping_price['Coconut Jelly'] = 0.8;
+topping_price['Pudding'] = 0.8;
+
+function calculateTotal() {
+  //console.log()
+  let basePrice = 4.99
+  let additionalCost = size_price[size.value] + milk_price[milk.value] + topping_price[topping.value]
+  let qty = quantity.value;
+
+  totalPrice.textContent = `Total cost: $${(basePrice * qty) + additionalCost}`;
+}

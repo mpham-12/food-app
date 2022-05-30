@@ -5,6 +5,9 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles/navbar.css">
+
+
   <title>Milkies</title>
 </head>
 <%- include('../partials/navbar.ejs') %>
@@ -21,9 +24,8 @@
       Starting at <%= drink.price %>
     </div>
 
-    <form action="/menu/<%=drink._id%>" method="POST">
+    <form class="submit-form" action="/menu/<%=drink._id%>" method="POST">
 
-      <% if (!id && !user.isAdmin){ %>
         <div>
           <label class="form-label" for="qty">Qty</label>
           <input class="calculate" type="number" id="quantity" name="quantity" min="1" value="1">
@@ -82,11 +84,10 @@
         </div>
 
 
-        <p id="total-price">Total: <%=drink.price%>
-        </p>
+        <p id="total-price"> Total:  </p>
 
         <button type="submit" id="cart-btn">Add to Order</button>
-        <% } %>
+   
 
 
           <% if (id && user.isAdmin){ %>
@@ -101,13 +102,12 @@
                       <a href="/menu/<%=drink._id%>/edit">EDIT DRINK
                 </a>
 
-                <form action="/menu/<%=drink._id%>" method="POST">
+                <form action="/menu/<%=drink._id%>/delete" method="POST">
                 <button>DELETE</button>
                 </form>
 
                       <% } %>
     </form>
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
       integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="/scripts/menuShow.js"></script>
