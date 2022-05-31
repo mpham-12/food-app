@@ -11,15 +11,4 @@ $(document).ready(function () {
     return $("#total-price").html('Total: ' + total);
 
   })
-
-
-
-
-  // $.ajax({
-  //   type: "PUT",
-  //   url: "/user",
-  //   data: {
-  //     price: inputName
-  //   },
-  // })
 });
