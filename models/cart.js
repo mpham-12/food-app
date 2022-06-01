@@ -10,12 +10,20 @@ const CartSchema = new Schema({
 		{
 			drinkName: String,
 			quantity: Number,
-			size: String,
+			size: {
+				type: Schema.Types.Mixed,
+				ref: 'Size',
+			},
 			sugarLevel: String,
 			iceLevel: String,
-			milkType: String,
-			topping: String,
-			price: Number,
+			milkType: {
+				type: Schema.Types.Mixed,
+				ref: 'Milk',
+			},
+			topping: [{
+				type: Schema.Types.ObjectId,
+				ref: 'Topping',
+			}],
 			image: String
 		}
 	]

@@ -22,7 +22,7 @@ const seedSize = [
     price: 0.69
   },
   {
-    size: 'Soy Milk',
+    size: 'Jumbo',
     price: 1.69
   }
 ]

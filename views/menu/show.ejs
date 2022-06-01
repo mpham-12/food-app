@@ -26,88 +26,112 @@
 
     <form class="submit-form" action="/menu/<%=drink._id%>" method="POST">
 
-        <div>
-          <label class="form-label" for="qty">Qty</label>
-          <input class="calculate" type="number" id="quantity" name="quantity" min="1" value="1">
+      <div>
+        <label class="form-label" for="qty">Qty</label>
+        <input class="calculate" type="number" id="quantity" name="quantity" min="1" value="1">
+      </div>
+
+      <h2>Select a size</h2>
+      <div>
+        <% for (size of sizes) {%>
+          <div>
+          <input type="radio" id="size" name="size" value="<%=size.size%>" >
+            <%=size.size%> +$<%=size.price%>
+          
+        </div>
+          <%}%>
         </div>
 
-        <div class="size">
-          <label class="form-label" for="size">Choose your Size</label>
-          <select class="form-control calculate" type="text" id="size" name="size" required>
-            <option data-price="0" selected value="Regular">Regular</option>
-            <option data-price="0.69" value="Large">Large +0.69</option>
-            <option data-price="1.69" value="Jumbo">Jumbo +1.69</option>
-          </select>
+      <div>
+        <h2 class="form-label" for="sugarLevel">Choose your Sugar Level</h2>
+        <input type="radio" id="sugarLevel" name="sugarLevel" value="100%">
+        <label for="sugarLevel">
+          100% Sugar
+        </label>
+        <input type="radio" id="sugarLevel" name="sugarLevel" value="80%">
+        <label for="sugarLevel">
+          80% Sugar
+        </label>
+        <input type="radio" id="sugarLevel" name="sugarLevel" value="50%">
+        <label for="sugarLevel">
+          50% Sugar
+        </label>
+        <input type="radio" id="option1" name="sugarLevel" value="30%">
+        <label for="sugarLevel">
+          30% Sugar
+        </label>
+        <input type="radio" id="option1" name="sugarLevel" value="0%">
+        <label for="sugarLevel">
+          0% Sugar
+        </label>
+      </div>
+
+      <div>
+        <h2 class="form-label" for="iceLevel">Choose your Ice Level</h2>
+        <input type="radio" id="option1" name="iceLevel" value="Normal Ice">
+        <label for="iceLevel">
+          Normal Ice
+        </label>
+        <input type="radio" id="option1" name="iceLevel" value="Less Ice">
+        <label for="iceLevel">
+          Less Ice
+        </label>
+        <input type="radio" id="option1" name="iceLevel" value="Eextra Ice">
+        <label for="iceLevel">
+          Extra Ice
+        </label>
+        <input type="radio" id="option1" name="iceLevel" value="No Ice">
+        <label for="iceLevel">
+          No Ice
+        </label>
+      </div>
+
+      <h2>Choose your milk:</h2>
+      <div>
+        <% for (milk of milks) {%>
+          <div>
+          <input type="radio" id="milkType" name="milkType" value="<%=milk.milkName%>">
+              <%=milk.milkName%> +$<%=milk.price%>
+          </div>
+          <%}%>
+      </div>
+
+<h2>Choose your toppings: </h2>
+      <div>
+        <% for (topping of toppings) {%>
+          <div>
+          <input type="checkbox" id="topping" name="topping" value="<%=topping.toppingName%>">
+              <%=topping.toppingName%> +$<%=topping.price%>
+          </div>
+          <%}%>
+      </div>
+
+
+      <p id="total-price"> Total: <%=drink.price%>
+      </p>
+
+      <button type="submit" id="cart-btn">Add to Order</button>
+
+
+
+      <% if (id && user.isAdmin){ %>
+
+        <div> Sugar Level: <%=drink.sugarLevel%>
+        </div>
+        <div>Ice Level: <%=drink.iceLevel%>
+        </div>
         </div>
 
-        <div>
-          <label class="form-label" for="sugarLevel">Choose your Sugar Level</label>
-          <select class="form-control" type="text" id="sugarLevel" name="sugarLevel" required>
-            <option selected value="100%">100%</option>
-            <option value="80%">80%</option>
-            <option value="50%">50%</option>
-            <option value="30%">30%</option>
-            <option value="0%">0%</option>
-          </select>
-        </div>
+        <a href="/menu/<%=drink._id%>/edit">EDIT DRINK
+        </a>
 
-        <div>
-          <label class="form-label" for="iceLevel">Choose your Ice Level</label>
-          <select class="form-control" type="text" id="iceLevel" name="iceLevel" required>
-            <option selected value="Regular Ice">Regular Ice</option>
-            <option value="Less Ice">Less Ice</option>
-            <option value="Extra Ice">Extra Ice</option>
-            <option value="No Ice">No Ice</option>
-          </select>
-        </div>
+        <form action="/menu/<%=drink._id%>/delete" method="POST">
+          <button>DELETE</button>
+        </form>
 
-        <div>
-          <label class="form-label" for="milkType">Choose your Milk</label>
-          <select class="form-control calculate" type="text" id="milkType" name="milkType" required>
-            <option data-price="0" selected value="2% Milk">2% Milk</option>
-            <option data-price="0.65" value="Oat Milk">Oat Milk +0.65</option>
-            <option data-price="0.65" value="Soy Milk">Soy Milk +0.65</option>
-            <option data-price="0.65" value="Almond Milk">Almond Milk +0.65</option>
-          </select>
-        </div>
-
-        <div>
-          <label class="form-label" for="iceLevel">Choose your Topping</label>
-          <select class="form-control calculate" type="text" id="topping" name="topping" required>
-            <option data-price="0" selected value="None">None</option>
-            <option data-price="0.8" value="Pearls">Pearls +0.80</option>
-            <option data-price="0.8" value="Brown Sugar Pearls">Brown Sugar Pearls +0.80</option>
-            <option data-price="0.8" value="Grass Jelly">Grass Jelly +0.80</option>
-            <option data-price="0.8" value="Coconut Jelly">Coconut Jelly +0.80</option>
-            <option data-price="0.8" value="Pudding">Pudding +0.80</option>
-          </select>
-        </div>
-
-
-        <p id="total-price"> Total:  <%=drink.price%></p>
-
-        <button type="submit" id="cart-btn">Add to Order</button>
-   
-
-
-          <% if (id && user.isAdmin){ %>
-
-            <div>Size: <%=drink.size%></div>
-            <div> Sugar Level: <%=drink.sugarLevel%></div>
-              <div>Ice Level: <%=drink.iceLevel%></div>
-                  <div> Milk: <%=drink.milkType%></div>
-                  <div> Topping: <%=drink.toppings%></div>
-                  </div>
-
-                      <a href="/menu/<%=drink._id%>/edit">EDIT DRINK
-                </a>
-
-                <form action="/menu/<%=drink._id%>/delete" method="POST">
-                <button>DELETE</button>
-                </form>
-
-                      <% } %>
+        <% } %>
     </form>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
       integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="/scripts/menuShow.js"></script>

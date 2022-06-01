@@ -15,6 +15,7 @@
 <body>
   <%- include('../partials/navbar.ejs') %>
 
+
     <h1>Cart</h1>
     <% if (!id) {%>
       <h2>Empty bag. Please log in to place an order</h2>
@@ -33,7 +34,10 @@
                   <%=item.quantity%>x <%=item.drinkName%>
                       <ul>
                         <li>
-                          <%=item.size%>
+                          <%=item.size[0].size%>
+                        </li>
+                        <li>
+                          size price: <%=item.size[0].price%>
                         </li>
                         <li>
                           <%=item.topping%>
@@ -44,7 +48,12 @@
                         <li>
                           <%=item.iceLevel%>
                         </li>
-
+                        <li>
+                          <%=item.milkType[0].milkName%>
+                        </li>
+                        <li>
+                          milk price: <%=item.milkType[0].price%>
+                        </li>
                       </ul>
                 </div>
                 <form action="" method="">
@@ -56,12 +65,12 @@
                 <%}%>
                   <%}%>
 
-                  <%if (cart.length<1){%>
-                    <button>Go to menu</button>
-                    <%} else {%>
+                    <%if (cart.length<1){%>
+                      <button>Go to menu</button>
+                      <%} else {%>
 
-        <a href="/user/checkout">Go to Checkout</a>
-                      <%}%>
+                        <a href="/user/checkout">Go to Checkout</a>
+                        <%}%>
 
 </body>
 

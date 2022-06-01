@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const User = require('../models/users');
 const Cart = require('../models/cart');
 const Menu = require('../models/menu');
+const topping = require('../models/topping');
 
 router.get('/', async (req, res) => {
 	const id = req.session.user_id;
@@ -85,13 +86,14 @@ router.post('/login', async (req, res) => {
 router.get('/cart', async (req, res) => {
 	const id = req.session.user_id;
 	const user = await User.findById(id)
-	const cart = await Cart.find({ customerId: id });
+	const cart = await Cart.find({ customerId: id }).populate('cartItems.topping')
+console.log(cart)
 	if (id && cart.length === 0) {
 		res.render('users/cart', { cart, id, user });
 	}
 	if (id && cart) {
 		const cartItems = cart[0].cartItems;
-		console.log('CART-----', cartItems)
+		// console.log('CART-----', cartItems)
 		res.render('users/cart', { cart, cartItems, id, user });
 	}
 	if (!id) {
