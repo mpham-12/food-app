@@ -64,19 +64,19 @@
                               <% let drinkTotal=(4.99 + item.milkType[0].price + item.size[0].price+ allToppings)*item.quantity %>
                                 Total: <%=drinkTotal.toFixed(2)%>
                 </div>
-                <%}%>
-                  <form action="" method="">
-                    <button>Edit</button>
-                  </form>
-                  <form action="/user/cart?_method=DELETE" method="POST">
+                <form action="" method="">
+                  <button>Edit</button>
+                </form>
+                <form action="/user/cart?_method=DELETE" method="POST">
                     <button>Delete</button>
                   </form>
                   <%}%>
                     <%if (cart.length<1){%>
                       <button>Go to menu</button>
                       <%} else {%>
-
+                        
                         <a href="/user/checkout">Go to Checkout</a>
+                        <%}%>
                         <%}%>
 
 </body>
