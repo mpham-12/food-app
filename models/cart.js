@@ -10,6 +10,7 @@ const CartSchema = new Schema({
 		{
 			drinkName: String,
 			quantity: Number,
+			drinkId: mongoose.ObjectId,
 			size: {
 				type: Schema.Types.Mixed,
 				ref: 'Size',

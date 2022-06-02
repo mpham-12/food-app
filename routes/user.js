@@ -4,7 +4,9 @@ const bcrypt = require('bcrypt');
 const User = require('../models/users');
 const Cart = require('../models/cart');
 const Menu = require('../models/menu');
-const topping = require('../models/topping');
+const Topping = require('../models/topping');
+const Milk = require('../models/milk');
+const Size = require('../models/size');
 
 router.get('/', async (req, res) => {
 	const id = req.session.user_id;
@@ -93,7 +95,7 @@ console.log(cart)
 	}
 	if (id && cart) {
 		const cartItems = cart[0].cartItems;
-		// console.log('CART-----', cartItems)
+		console.log('CART ITEMS', cartItems[0]._id)
 		res.render('users/cart', { cart, cartItems, id, user });
 	}
 	if (!id) {
@@ -107,14 +109,25 @@ router.get('/checkout', async (req, res) => {
 	const user = await User.findById(id)
 	const cart = await Cart.find({ customerId: id }).populate('cartItems.topping');
 	const cartItems = cart[0].cartItems;
-	console.log('CART ITEMS', cartItems)
 res.render('users/checkout', {user, cartItems, id, cart})
 })
 
-router.delete('/cart', async (req, res) => {
+router.get('/cart/:drinkId/edit', async (req, res) => {
+	const id = req.session.user_id;
 	const { drinkId } = req.params;
-	await Menu.findByIdAndDelete(drinkId);
-	res.redirect('/menu')
+	const toppings = await Topping.find();
+	const milks = await Milk.find();
+	const sizes = await Size.find();
+	const user = await User.findById(id);
+	const drink = await Menu.findById(drinkId);
+res.render('users/edit', {drink, id, user, toppings, milks, sizes});
+});
+
+router.put('/cart/:drinkId/edit', async (req, res) => {
+	const { drinkId } = req.params;
+	const cart = await Cart.findByIdAndUpdate(drinkId, { ...req.body });
+	await cart.save();
+res.redirect('/user/cart')
 });
 
 router.post('/logout', (req, res) => {

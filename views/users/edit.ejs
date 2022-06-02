@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles/navbar.css">
+
+
+  <title>Milkies</title>
+</head>
+<%- include('../partials/navbar.ejs') %>
+
+<body>
+<img src=<%= drink.image %> alt="">
+      <%= drink.drinkName %>
+    </div>
+    <div>
+      <%= drink.description %>
+    </div>
+    <div>
+      Starting at <%= drink.price %>
+    </div>
+
+    <form class="submit-form" action="/menu/<%=drink._id%>" method="POST">
+
+      <div>
+        <label class="form-label" for="qty">Qty</label>
+        <input class="calculate" type="number" id="quantity" name="quantity" min="1" value="1">
+      </div>
+
+      <h2>Select a size</h2>
+      <div>
+        <% for (size of sizes) {%>
+          <div>
+          <input type="radio" id="size" name="size" value="<%=size.size%>" >
+            <%=size.size%> +$<%=size.price%>
+          
+        </div>
+          <%}%>
+        </div>
+
+      <div>
+        <h2 class="form-label" for="sugarLevel">Choose your Sugar Level</h2>
+        <input type="radio" id="sugarLevel" name="sugarLevel" value="100%">
+        <label for="sugarLevel">
+          100% Sugar
+        </label>
+        <input type="radio" id="sugarLevel" name="sugarLevel" value="80%">
+        <label for="sugarLevel">
+          80% Sugar
+        </label>
+        <input type="radio" id="sugarLevel" name="sugarLevel" value="50%">
+        <label for="sugarLevel">
+          50% Sugar
+        </label>
+        <input type="radio" id="option1" name="sugarLevel" value="30%">
+        <label for="sugarLevel">
+          30% Sugar
+        </label>
+        <input type="radio" id="option1" name="sugarLevel" value="0%">
+        <label for="sugarLevel">
+          0% Sugar
+        </label>
+      </div>
+
+      <div>
+        <h2 class="form-label" for="iceLevel">Choose your Ice Level</h2>
+        <input type="radio" id="option1" name="iceLevel" value="Normal Ice">
+        <label for="iceLevel">
+          Normal Ice
+        </label>
+        <input type="radio" id="option1" name="iceLevel" value="Less Ice">
+        <label for="iceLevel">
+          Less Ice
+        </label>
+        <input type="radio" id="option1" name="iceLevel" value="Eextra Ice">
+        <label for="iceLevel">
+          Extra Ice
+        </label>
+        <input type="radio" id="option1" name="iceLevel" value="No Ice">
+        <label for="iceLevel">
+          No Ice
+        </label>
+      </div>
+
+      <h2>Choose your milk:</h2>
+      <div>
+        <% for (milk of milks) {%>
+          <div>
+          <input type="radio" id="milkType" name="milkType" value="<%=milk.milkName%>">
+              <%=milk.milkName%> +$<%=milk.price%>
+          </div>
+          <%}%>
+      </div>
+
+<h2>Choose your toppings: </h2>
+      <div>
+        <% for (topping of toppings) {%>
+          <div>
+          <input type="checkbox" id="topping" name="topping" value="<%=topping.toppingName%>">
+              <%=topping.toppingName%> +$<%=topping.price%>
+          </div>
+          <%}%>
+      </div>
+
+
+      <p id="total-price"> Total: <%=drink.price%>
+      </p>
+
+      <form action="/user/cart/<%=drink._id%>/edit" method="POST">
+        <button type="submit" id="cart-btn">Edit Drink</button>
+      </form>
+
+    </form>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="/scripts/menuShow.js"></script>
+  </body>
+
+</html>

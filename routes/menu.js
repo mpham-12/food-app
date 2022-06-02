@@ -44,6 +44,7 @@ router.post('/:drinkId', async (req, res) => {
 	if (cart) {
 		cart.cartItems.push({
 			drinkName: drink.drinkName,
+			drinkId: drinkId,
 			quantity: req.body.quantity,
 			size: size,
 			sugarLevel: req.body.sugarLevel,
@@ -65,6 +66,7 @@ router.post('/:drinkId', async (req, res) => {
 			cartItems: [
 				{
 					drinkName: drink.drinkName,
+					drinkId: drinkId,
 					quantity: req.body.quantity,
 					size: size,
 					sugarLevel: req.body.sugarLevel,

@@ -64,10 +64,10 @@
                               <% let drinkTotal=(4.99 + item.milkType[0].price + item.size[0].price+ allToppings)*item.quantity %>
                                 Total: <%=drinkTotal.toFixed(2)%>
                 </div>
-                <form action="" method="">
-                  <button>Edit</button>
-                </form>
-                <form action="/user/cart?_method=DELETE" method="POST">
+                
+                <a href="/user/cart/<%=item.drinkId%>/edit">Edit</a>
+                
+                <form action="/user/cart/delete" method="POST">
                     <button>Delete</button>
                   </form>
                   <%}%>
