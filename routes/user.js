@@ -105,24 +105,16 @@ console.log(cart)
 router.get('/checkout', async (req, res) => {
 	const id = req.session.user_id;
 	const user = await User.findById(id)
-	const cart = await Cart.find({ customerId: id });
+	const cart = await Cart.find({ customerId: id }).populate('cartItems.topping');
 	const cartItems = cart[0].cartItems;
-
-
+	console.log('CART ITEMS', cartItems)
 res.render('users/checkout', {user, cartItems, id, cart})
 })
 
 router.delete('/cart', async (req, res) => {
-	const id = req.session.user_id;
-	const user = await User.findById(id);
-	const cart = await Cart.find({ customerId: id });
-
-	Cart.findOneAndDelete(cart[0].cartItems[0]._id)
-	// for (drink of cart[0].cartItems) {
-	// 	const drinkName = drink.drinkName;
-	// 	console.log(drink._id)
-	// }
-	// console.log(cart[0].cartItems._id)
+	const { drinkId } = req.params;
+	await Menu.findByIdAndDelete(drinkId);
+	res.redirect('/menu')
 });
 
 router.post('/logout', (req, res) => {

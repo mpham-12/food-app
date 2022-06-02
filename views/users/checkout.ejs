@@ -16,40 +16,59 @@
   <%- include('../partials/navbar.ejs') %>
 
     <h1>CHECKOUT</h1>
- 
 
-    <div>Pick up Address: 
+
+    <div>Pick up Address:
     </div>
     <div>Milkies
-111 Boba Ave, Vaughan, On, B0B 4V3</div>
+      111 Boba Ave, Vaughan, On, B0B 4V3</div>
 
 
 
-<div>Pick-up estimate 5-15 min(s)</div>
+    <div>Pick-up estimate 5-15 min(s)</div>
 
 
-Your Items:
-<div>
-<a href="/menu">+ Add Items</a>
-</div>
+    Your Items:
+    <div>
+      <a href="/menu">+ Add Items</a>
+    </div>
 
-<% for (let item of cartItems) {%>
-  <div>
-    <%=item.quantity%> 
-    <%=item.drinkName%>
-  </div>
-  <%}%>
+    <% let subtotal=0 %>
+    <% cartItems.forEach(function (item) {%>
+      <div>
+        <%=item.quantity%> x <%=item.drinkName%>
+      </div>
+          <div>
+            <% let toppingsArr=[] %>
+            <% for (topping of item.topping){ %>
+              <% toppingsArr.push(topping.toppingName) %>
+                <% }%>
+            <%=item.size[0].size%>, <%=item.milkType[0].milkName%>, <%=item.iceLevel%>, <%=toppingsArr.join(', ') %>
+          </div>
+          <div>
+            <% let toppingsPrice=[] %>
+            <% for (topping of item.topping){ %>
+              <% toppingsPrice.push(topping.price) %>
+                <% }%>
+                    <% const allToppings=toppingsPrice.reduce((previousValue, currentValue) => previousValue + currentValue)%>
 
-<div>Payment Method:</div>
+                      <% let drinkTotal=(4.99 + item.milkType[0].price + item.size[0].price+ allToppings)*item.quantity %>
+                        Total: $<%=drinkTotal.toFixed(2)%>
+          </div>
+          <% subtotal += Number(drinkTotal) %>
+                  
+          <%})%>
+
+        <div>Payment Method:</div>
 
 
-<div>Subtotal:</div>
-  
-<div>Taxes:</div>
-  
-<div>Total:</div>
+        <div>Subtotal: $<%=subtotal.toFixed(2)%></div>
 
+        <div>Taxes: $<%=(subtotal*0.13).toFixed(2)%></div>
 
+        <div>Total: $<%=(subtotal*1.13).toFixed(2)%></div>
+
+       
 
 </body>
 
