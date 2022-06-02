@@ -23,7 +23,7 @@
       Starting at <%= drink.price %>
     </div>
 
-    <form class="submit-form" action="/menu/<%=drink._id%>" method="POST">
+    <form class="submit-form" action="/user/cart/<%=drink._id%>/edit" method="POST">
 
       <div>
         <label class="form-label" for="qty">Qty</label>
@@ -109,9 +109,7 @@
       <p id="total-price"> Total: <%=drink.price%>
       </p>
 
-      <form action="/user/cart/<%=drink._id%>/edit" method="POST">
         <button type="submit" id="cart-btn">Edit Drink</button>
-      </form>
 
     </form>
 

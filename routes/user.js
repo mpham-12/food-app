@@ -10,7 +10,7 @@ const Size = require('../models/size');
 
 router.get('/', async (req, res) => {
 	const id = req.session.user_id;
-	const admin = await User.find({admin: true});
+	const admin = await User.find({ admin: true });
 	const user = await User.findById(id);
 	if (!user) {
 		res.redirect('/user/login')
@@ -89,13 +89,13 @@ router.get('/cart', async (req, res) => {
 	const id = req.session.user_id;
 	const user = await User.findById(id)
 	const cart = await Cart.find({ customerId: id }).populate('cartItems.topping')
-console.log(cart)
+	// console.log(cart)
 	if (id && cart.length === 0) {
 		res.render('users/cart', { cart, id, user });
 	}
 	if (id && cart) {
 		const cartItems = cart[0].cartItems;
-		console.log('CART ITEMS', cartItems[0]._id)
+		// console.log('CART ITEMS', cartItems[0]._id)
 		res.render('users/cart', { cart, cartItems, id, user });
 	}
 	if (!id) {
@@ -109,7 +109,7 @@ router.get('/checkout', async (req, res) => {
 	const user = await User.findById(id)
 	const cart = await Cart.find({ customerId: id }).populate('cartItems.topping');
 	const cartItems = cart[0].cartItems;
-res.render('users/checkout', {user, cartItems, id, cart})
+	res.render('users/checkout', { user, cartItems, id, cart })
 })
 
 router.get('/cart/:drinkId/edit', async (req, res) => {
@@ -120,14 +120,17 @@ router.get('/cart/:drinkId/edit', async (req, res) => {
 	const sizes = await Size.find();
 	const user = await User.findById(id);
 	const drink = await Menu.findById(drinkId);
-res.render('users/edit', {drink, id, user, toppings, milks, sizes});
+	res.render('users/edit', { drink, id, user, toppings, milks, sizes });
 });
 
-router.put('/cart/:drinkId/edit', async (req, res) => {
+router.post('/cart/:drinkId/edit', async (req, res) => {
+	const id = req.session.user_id;
 	const { drinkId } = req.params;
-	const cart = await Cart.findByIdAndUpdate(drinkId, { ...req.body });
-	await cart.save();
-res.redirect('/user/cart')
+	const cart = await Cart.findByIdAndUpdate({
+		drinkId: drinkId
+	}, { $set: { ...req.body }}).exec();
+	await cart.save()
+	res.redirect('/user/cart')
 });
 
 router.post('/logout', (req, res) => {
