@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
-
 <body>
+  
 
   <h1>ORDER HISTORY</h1>
 
-  <% for (let order of orders){ %>
+  <%if (pastOrders.length===0){%>
+<h2>You have no previous orders. Start your order <a href="/menu">here</a></h2>
+  <%} else {%>
+  <% for (let order of pastOrders){ %>
     <div>   
       <%=order.orderedAt%>
       <%=order.customerId.firstName%>
@@ -35,9 +37,8 @@
     <% } %>
     total: <%=order.total%>
     <% } %>
+    <% } %>
     
 
-
 </body>
-
 </html>
