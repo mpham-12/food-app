@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <h1>ORDER HISTORY</h1>
+
+  <% for (let order of orders){ %>
+    <div>      
+      <%=order.customerId.firstName%>
+        <%=order.customerId.lastName%>
+       email:  <%=order.customerId.email%>
+      customer phone number: <%=order.customerId.phoneNumber%>
+    </div>
+    <%for (let drink of order.orderItems) {%>
+      <%=drink.quantity%> x <%=drink.drinkName%>
+      <%=drink.size[0].size%>,  <%=drink.milkType[0].milkName%>, <%=drink.sugarLevel%> Sugar, <%=drink.iceLevel%>
+
+      <%let toppingsArr = [];%>
+       <% for (topping of drink.topping){%>
+        <% toppingsArr.push(topping.toppingName)%>
+        <% }%>
+        <%=toppingsArr.join(", ")%>
+<div>
+
+</div>
+    <% } %>
+    total: <%=order.total%>
+    <% } %>
+    
+
+
+</body>
+
+</html>

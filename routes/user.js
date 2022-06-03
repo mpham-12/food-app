@@ -143,8 +143,7 @@ router.post('/checkout', async (req, res) => {
 		orderItems: checkoutArr,
 		total: total
 	})
-
-	// await Cart.findOneAndDelete({ customerId: id })
+	await Cart.findOneAndDelete({ customerId: id })
 	res.render('users/orderComplete')
 })
 
