@@ -7,12 +7,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link rel="stylesheet" href="/styles/navbar.css">
+  <link rel="stylesheet" href="/styles/checkout.css">
 
 
   <title>Milkies</title>
 </head>
 
-<body>
+<body class="checkout-body">
   <%- include('../partials/navbar.ejs') %>
 
     <h1>CHECKOUT</h1>
@@ -34,16 +35,17 @@
     </div>
 
     <% let subtotal=0 %>
-    <% cartItems.forEach(function (item) {%>
-      <div>
-        <%=item.quantity%> x <%=item.drinkName%>
-      </div>
-          <div>
-            <% let toppingsArr=[] %>
-            <% for (topping of item.topping){ %>
-              <% toppingsArr.push(topping.toppingName) %>
-                <% }%>
-            <%=item.size[0].size%>, <%=item.milkType[0].milkName%>, <%=item.iceLevel%>, <%=toppingsArr.join(', ') %>
+      <% cartItems.forEach(function (item) {%>
+        <section class="checkout-item"> <div class="">
+          <%=item.quantity%> x <%=item.drinkName%>
+              </div>
+              <div>
+                <% let toppingsArr=[] %>
+                  <% for (topping of item.topping){ %>
+                    <% toppingsArr.push(topping.toppingName) %>
+                      <% }%>
+                        <%=item.size[0].size%>, <%=item.milkType[0].milkName%>, <%=item.iceLevel%>,
+                              <%=toppingsArr.join(', ') %>
           </div>
           <div>
             <% let toppingsPrice=[] %>
@@ -55,6 +57,8 @@
                       <% let drinkTotal=(4.99 + item.milkType[0].price + item.size[0].price+ allToppings)*item.quantity %>
                         Total: $<%=drinkTotal.toFixed(2)%>
           </div>
+        </section>
+
           <% subtotal += Number(drinkTotal) %>
                   
           <%})%>
@@ -68,7 +72,9 @@
 
         <div>Total: $<%=(subtotal*1.13).toFixed(2)%></div>
 
-       
+       <form action="/user/checkout" method="POST">
+         <button>Submit</button>
+       </form>
 
 </body>
 

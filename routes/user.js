@@ -7,6 +7,8 @@ const Menu = require('../models/menu');
 const Topping = require('../models/topping');
 const Milk = require('../models/milk');
 const Size = require('../models/size');
+const Order = require('../models/orders');
+const orders = require('../models/orders');
 
 router.get('/', async (req, res) => {
 	const id = req.session.user_id;
@@ -89,13 +91,11 @@ router.get('/cart', async (req, res) => {
 	const id = req.session.user_id;
 	const user = await User.findById(id)
 	const cart = await Cart.find({ customerId: id }).populate('cartItems.topping')
-	// console.log(cart)
 	if (id && cart.length === 0) {
 		res.render('users/cart', { cart, id, user });
 	}
 	if (id && cart) {
 		const cartItems = cart[0].cartItems;
-		// console.log('CART ITEMS', cartItems[0]._id)
 		res.render('users/cart', { cart, cartItems, id, user });
 	}
 	if (!id) {
@@ -112,6 +112,47 @@ router.get('/checkout', async (req, res) => {
 	res.render('users/checkout', { user, cartItems, id, cart })
 })
 
+router.post('/checkout', async (req, res) => {
+	const id = req.session.user_id;
+	const cart = await Cart.find({ customerId: id }).populate('cartItems.topping')
+	const cartItems = cart[0].cartItems;
+
+
+	let subTotal = 0;
+	cartItems.forEach(function (item) {
+		let toppingsPrice = [];
+		for (topping of item.topping) {
+			toppingsPrice.push(topping.price)
+		}
+		const allToppings = toppingsPrice.reduce((previousValue, currentValue) => previousValue + currentValue)
+		let drinkTotal = (4.99 + item.milkType[0].price + item.size[0].price + allToppings) * item.quantity
+		drinkTotal.toFixed(2)
+		subTotal += Number(drinkTotal)
+	})
+	let total = (subTotal * 1.13).toFixed(2)
+
+	let checkoutArr = [];
+
+	for (item of cartItems) {
+		checkoutArr.push(item)
+	}
+	console.log('CHECKOUTARR-------', checkoutArr)
+
+	await Order.create({
+		customerId: id,
+		orderItems: checkoutArr,
+		total: total
+	})
+
+	// await Cart.findOneAndDelete({ customerId: id })
+	res.render('users/orderComplete')
+})
+
+
+
+
+
+
 router.get('/cart/:drinkId/edit', async (req, res) => {
 	const id = req.session.user_id;
 	const { drinkId } = req.params;
@@ -124,13 +165,7 @@ router.get('/cart/:drinkId/edit', async (req, res) => {
 });
 
 router.post('/cart/:drinkId/edit', async (req, res) => {
-	const id = req.session.user_id;
-	const { drinkId } = req.params;
-	const cart = await Cart.findByIdAndUpdate({
-		drinkId: drinkId
-	}, { $set: { ...req.body }}).exec();
-	await cart.save()
-	res.redirect('/user/cart')
+	res.redirect('/menu');
 });
 
 router.post('/logout', (req, res) => {

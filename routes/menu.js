@@ -38,7 +38,6 @@ router.post('/:drinkId', async (req, res) => {
 	const milk = await Milk.find({milkName: req.body.milkType});
 	const size = await Size.find({size: req.body.size});
 	const topping = await Topping.find({toppingName: req.body.topping});
-	console.log(milk)
 	const drink = await Menu.findById(drinkId);
 	let cart = await Cart.findOne({ customerId: id });
 	if (cart) {
@@ -54,11 +53,6 @@ router.post('/:drinkId', async (req, res) => {
 			image: drink.image
 		});
 		await cart.save();
-		// console.log('existing cart', cart)
-		// console.log('req body 1', req.body)
-		console.log('milk', milk)
-		console.log('size', size)
-		console.log('topping', topping)
 		res.redirect('/menu');
 	} else {
 		const newCart = await Cart.create({
@@ -77,8 +71,6 @@ router.post('/:drinkId', async (req, res) => {
 				}
 			]
 		});
-		console.log('new cart', cart)
-		console.log('req body 2', req.body)
 		res.redirect('/menu');
 	}
 });
