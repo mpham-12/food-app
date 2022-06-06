@@ -8,7 +8,6 @@ const Topping = require('../models/topping');
 const Milk = require('../models/milk');
 const Size = require('../models/size');
 const Order = require('../models/orders');
-const orders = require('../models/orders');
 
 router.get('/', async (req, res) => {
 	const id = req.session.user_id;
@@ -27,15 +26,13 @@ router.put('/', async (req, res) => {
 	const newNumber = req.body.phoneNumber
 
 	if (!newLastName && !newNumber && newFirstName.length >= 1) {
-		const updateFirstName = await User.findByIdAndUpdate(id, { $set: { firstName: newFirstName } });
+		await User.findByIdAndUpdate(id, { $set: { firstName: newFirstName } });
 	}
-
 	if (!newFirstName && !newNumber && newLastName.length >= 1) {
-		const updateLastName = await User.findByIdAndUpdate(id, { $set: { lastName: newLastName } });
+		await User.findByIdAndUpdate(id, { $set: { lastName: newLastName } });
 	}
 	if (!newFirstName && !newLastName && newNumber.length >= 1) {
-		const updateNumber = await User.findByIdAndUpdate(id, { $set: { phoneNumber: newNumber } });
-
+		await User.findByIdAndUpdate(id, { $set: { phoneNumber: newNumber } });
 	}
 	res.status(201).send();
 });
@@ -150,11 +147,9 @@ router.post('/checkout', async (req, res) => {
 
 router.get('/orders', async (req, res) => {
 	const id = req.session.user_id;
-	const pastOrders = await Order.find({customerId: id})
-	res.render('users/orderHistory', {pastOrders})
+	const pastOrders = await Order.find({ customerId: id })
+	res.render('users/orderHistory', { pastOrders })
 })
-
-
 
 router.get('/cart/:drinkId/edit', async (req, res) => {
 	const id = req.session.user_id;
@@ -166,6 +161,29 @@ router.get('/cart/:drinkId/edit', async (req, res) => {
 	const drink = await Menu.findById(drinkId);
 	res.render('users/edit', { drink, id, user, toppings, milks, sizes });
 });
+
+router.put('/cart/:drinkId/edit', async (req, res) => {
+	const id = req.session.user_id;
+	const { drinkId } = req.params;
+	const milk = await Milk.find({ milkName: req.body.milkType });
+	const size = await Size.find({ size: req.body.size });
+	const topping = await Topping.find({ toppingName: req.body.topping });
+	let cart = await Cart.findOneAndUpdate({ customerId: id, 'cartItems.drinkId': drinkId }, {
+		$set: {
+			cartItems: [{
+				'cartItems.$.drinkId': drinkId,
+				'cartItems.$.quantity': req.body.quantity,
+				'cartItems.$.size': size,
+				'cartItems.$.sugarLevel': req.body.sugarLevel,
+				'cartItems.$.iceLevel': req.body.iceLevel,
+				'cartItems.$.milkType': milk,
+				'cartItems.$.topping': topping
+			}]
+		},
+	}, { new: true })
+	await cart.save();
+	res.redirect('/')
+})
 
 router.post('/cart/:drinkId/edit', async (req, res) => {
 	res.redirect('/menu');
