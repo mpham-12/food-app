@@ -1,0 +1,18 @@
+.account-body{
+  margin:0;
+}
+
+.profile{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.info{
+  width: 30%;
+}
+
+.input{
+  display: flex;
+  justify-content: space-between;
+}

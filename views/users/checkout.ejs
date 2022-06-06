@@ -15,37 +15,45 @@
 
 <body class="checkout-body">
   <%- include('../partials/navbar.ejs') %>
+<section class="checkout">
 
     <h1>CHECKOUT</h1>
+    <h2>Milkies Boba</h2>
 
+    <section class="checkout-info">
 
-    <div>Pick up Address:
-    </div>
-    <div>Milkies
-      111 Boba Ave, Vaughan, On, B0B 4V3</div>
+      <section class="store-info">
 
-
-
-    <div>Pick-up estimate 5-15 min(s)</div>
-
-
-    Your Items:
-    <div>
-      <a href="/menu">+ Add Items</a>
-    </div>
+        <div>Pick up Address:
+        </div>
+        <div>
+          Milkies 111 Boba Ave, Vaughan, On, B0B 4V3</div>
+      
+      <div>Pick-up estimate 5-15 min(s)</div>
+      
+      
+      <div>
+        Your Order:
+        
+        <a href="/menu">+ Add Items</a>
+        
+        
+      </div>
+    </section>
 
     <% let subtotal=0 %>
       <% cartItems.forEach(function (item) {%>
-        <section class="checkout-item"> <div class="">
-          <%=item.quantity%> x <%=item.drinkName%>
-              </div>
-              <div>
-                <% let toppingsArr=[] %>
-                  <% for (topping of item.topping){ %>
-                    <% toppingsArr.push(topping.toppingName) %>
-                      <% }%>
-                        <%=item.size[0].size%>, <%=item.milkType[0].milkName%>, <%=item.iceLevel%>,
-                              <%=toppingsArr.join(', ') %>
+        <section class="checkout-item">
+          <div class="">
+            <%=item.quantity%> x <%=item.drinkName%>
+          </div>
+          <div>
+            <% let toppingsArr=[] %>
+              <% for (topping of item.topping){ %>
+                <% toppingsArr.push(topping.toppingName) %>
+                  <% }%>
+                    <%=item.size[0].size%>, <%=item.milkType[0].milkName%>, <%=item.iceLevel%>,
+                          <%=toppingsArr.join(', ') %>
           </div>
           <div>
             <% let toppingsPrice=[] %>
@@ -62,7 +70,7 @@
           <% subtotal += Number(drinkTotal) %>
                   
           <%})%>
-
+        </section>
         <div>Payment Method:</div>
 
 
@@ -75,6 +83,7 @@
        <form action="/user/checkout" method="POST">
          <button>Submit</button>
        </form>
+      </section>
 
 </body>
 

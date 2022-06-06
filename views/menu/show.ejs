@@ -6,31 +6,38 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/styles/navbar.css">
+  <link rel="stylesheet" href="/styles/menuShow.css">
 
 
   <title>Milkies</title>
 </head>
 <%- include('../partials/navbar.ejs') %>
 
-  <body>
-    <img src=<%=drink.image %> alt="" style='height:400px'>
-    <div>
-      <%= drink.drinkName %>
-    </div>
-    <div>
-      <%= drink.description %>
-    </div>
-    <div>
-      Starting at <%= drink.price %>
-    </div>
+  <body class="menu-body">
+    <container class="show-container">
 
-    <form class="submit-form" action="/menu/<%=drink._id%>" method="POST">
+    <section class="show-left">
+      <img src=<%=drink.image %> alt="" style='height:400px'>
+      <div>
+        <%= drink.drinkName %>
+      </div>
+      <div>
+        <%= drink.description %>
+      </div>
+      <div>
+        Starting at <%= drink.price %>
+      </div>
+    </section>
 
+    <section class="show-right">
+
+      <form class="submit-form" action="/menu/<%=drink._id%>" method="POST">
+        
       <div>
         <label class="form-label" for="qty">Qty</label>
         <input class="calculate" type="number" id="quantity" name="quantity" min="1" value="1">
       </div>
-
+      
       <h2>Select a size</h2>
       <div>
         <% for (size of sizes) {%>
@@ -131,6 +138,9 @@
 
         <% } %>
     </form>
+  </section>
+</container>
+
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
       integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>

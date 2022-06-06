@@ -1,0 +1,30 @@
+.menu-body{
+  margin: 0;
+}
+
+.show-container{
+  display: flex;
+  flex-direction: row;
+  padding: 30px 15px;
+}
+
+h2{
+  font-size: 14px;
+}
+.show-left{
+  padding-right: 20px;
+  width: 50%;
+}
+.show-right{
+
+width: 45%;
+}
+
+button{
+  width: 50%;
+  height: 40px;
+  margin-top: 10px;
+  background-color: #f0d42c;
+  border: 1px solid #f0d42c;
+  border-radius: 5px;
+}

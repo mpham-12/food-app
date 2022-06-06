@@ -147,8 +147,9 @@ router.post('/checkout', async (req, res) => {
 
 router.get('/orders', async (req, res) => {
 	const id = req.session.user_id;
+	const user = await User.findById(id);
 	const pastOrders = await Order.find({ customerId: id })
-	res.render('users/orderHistory', { pastOrders })
+	res.render('users/orderHistory', { pastOrders, id, user })
 })
 
 router.get('/cart/:drinkId/edit', async (req, res) => {

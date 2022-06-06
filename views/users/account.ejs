@@ -7,31 +7,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link rel="stylesheet" href="/styles/navbar.css">
+  <link rel="stylesheet" href="/styles/myAccount.css">
 
 
   <title>Milkies</title>
 
 </head>
 
-<body>
-  <%- include('../partials/navbar.ejs') %>
-  <h1>profile</h1>
-  <div id="first_name"> First Name: <%= user.firstName%>
-  </div>
-  <button id="edit-first_name">EDIT</button>
+<%- include('../partials/navbar.ejs') %>
+<body class="account-body">
+  <section class="profile">
+    <section class="info">
 
+    <h1>profile</h1>
+    <div class="input" id="first_name"> First Name: <%= user.firstName%>
+      <button id="edit-first_name">EDIT</button>
+    </div>
+  
   <form action="/user?_method=PUT" method="POST">
-
-  <div id="first_name_input">
+    
+    <div  id="first_name_input">
   <input type="text" name="firstName" id="firstName" required>
   <button class="update-first_name" type="button">Update</button>
   <div id="error-message-name"></div>
 </div>
 
 <div>
-<div id="last_name"> Last Name: <%= user.lastName%>
+<div class="input" id="last_name"> Last Name: <%= user.lastName%>
+  <button id="edit-last_name">EDIT</button>
 </div>
-<button id="edit-last_name">EDIT</button>
 
 <div id="last_name_input">
   <input type="text" name="lastName" id="lastName" required>
@@ -41,27 +45,31 @@
 </div>
 
 <div>
-  <div id="phone-number"> Phone Number: <%= user.phoneNumber%>
+  <div class="input" id="phone-number"> Phone Number: <%= user.phoneNumber%>
+    <button id="edit-phone_number">EDIT</button>
   </div>
-  <button id="edit-phone_number">EDIT</button>
   
   <div id="phone-number_input">
     <input type="text" name="phoneNumber" id="phoneNumber" required>
     <button class="update-phone_number" type="button">Update</button>
     <div id="error-message-name"></div>
   </div>
-  </div>
+</div>
 
 </form>
 
 Email: <%= user.email%>
+<div>
+  <a href="/user/orders">Past Orders</a>
+</div>
 
-<a href="/user/orders">Past Orders</a>
-
-    </form>
+</form>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="/scripts/profile.js"></script>
+    
 
+    </section>
+  </section>
 </body>
 
 
