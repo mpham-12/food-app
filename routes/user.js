@@ -93,6 +93,7 @@ router.get('/cart', async (req, res) => {
 	}
 	if (id && cart) {
 		const cartItems = cart[0].cartItems;
+		console.log(cartItems, 'CARTITEMSSSSS')
 		res.render('users/cart', { cart, cartItems, id, user });
 	}
 	if (!id) {

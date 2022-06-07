@@ -1,5 +1,10 @@
 .account-body{
   margin:0;
+  font-family: 'Noto Sans JP', sans-serif;
+
+}
+h1{
+text-align: center;
 }
 
 .profile{
@@ -11,8 +16,116 @@
 .info{
   width: 30%;
 }
-
+input{
+  padding: 5px;
+  width: 300px;
+}
 .input{
   display: flex;
   justify-content: space-between;
+  margin-bottom: 20px;
 }
+
+section.info{
+  margin-top: 50px;
+  width: 500px;
+}
+
+
+
+#first_name_input{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+#last_name_input{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+#phone-number_input{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.update-first_name{
+  font-family: 'Noto Sans JP', sans-serif;
+  width: 100px;
+  background-color: #f0d42c;
+  border: 1px solid #f0d42c;
+  border-radius: 5px;
+  padding: 5px 0px;
+  text-align: center;
+  margin-right: 0px;
+  margin-left: 200px;
+}
+.update-last_name{
+  font-family: 'Noto Sans JP', sans-serif;
+  width: 100px;
+  background-color: #f0d42c;
+  border: 1px solid #f0d42c;
+  border-radius: 5px;
+  padding: 5px 0px;
+  text-align: center;
+  margin-right: 0px;
+  margin-left: 200px;
+}
+.update-phone_number{
+  font-family: 'Noto Sans JP', sans-serif;
+  width: 100px;
+  background-color: #f0d42c;
+  border: 1px solid #f0d42c;
+  border-radius: 5px;
+  padding: 5px 0px;
+  text-align: center;
+  margin-right: 0px;
+  margin-left: 200px;
+}
+#edit-first_name{
+  font-family: 'Noto Sans JP', sans-serif;
+  width: 73px;
+  background-color: #449c67;
+  border: 1px solid #449c67;;
+  color: white;
+  border-radius: 5px;
+  padding: 5px 0px;
+  text-align: center;
+  margin-right: 0px;
+  margin-left: 200px;
+}
+#edit-last_name{
+  font-family: 'Noto Sans JP', sans-serif;
+  width: 73px;
+  background-color: #449c67;
+  border: 1px solid #449c67;;
+  color: white;
+  border-radius: 5px;
+  padding: 5px 0px;
+  text-align: center;
+  margin-right: 0px;
+  margin-left: 200px;
+}
+#edit-phone_number{
+  font-family: 'Noto Sans JP', sans-serif;
+  width: 73px;
+  background-color: #449c67;
+  border: 1px solid #449c67;;
+  color: white;
+  border-radius: 5px;
+  padding: 5px 0px;
+  text-align: center;
+  margin-right: 0px;
+  margin-left: 200px;
+}
+
+.past-orders{
+  margin: 50px 0px;
+}
+.past-orders-link{
+text-decoration: none;
+}
+

@@ -9,6 +9,10 @@
   <link rel="stylesheet" href="/styles/navbar.css">
   <link rel="stylesheet" href="/styles/checkout.css">
 
+      <!-- Fonts -->
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400&display=swap" rel="stylesheet">
 
   <title>Milkies</title>
 </head>
@@ -17,37 +21,31 @@
   <%- include('../partials/navbar.ejs') %>
 <section class="checkout">
 
-    <h1>CHECKOUT</h1>
-    <h2>Milkies Boba</h2>
+    <h1 class="checkout-title">Milkies Boba</h1>
 
     <section class="checkout-info">
 
       <section class="store-info">
 
-        <div>Pick up Address:
+        <div>Pick up Address:</div>
+        <div class="address">
+          Milkies 111 Boba Ave, Vaughan, On, B0B 4V3
         </div>
-        <div>
-          Milkies 111 Boba Ave, Vaughan, On, B0B 4V3</div>
       
-      <div>Pick-up estimate 5-15 min(s)</div>
-      
-      
-      <div>
+      <div class="pick-up">Pick-up estimate 5-15 min(s)</div>
+      <div> 
         Your Order:
-        
         <a href="/menu">+ Add Items</a>
-        
-        
       </div>
     </section>
 
     <% let subtotal=0 %>
       <% cartItems.forEach(function (item) {%>
         <section class="checkout-item">
-          <div class="">
+          <div class="drink-title">
             <%=item.quantity%> x <%=item.drinkName%>
           </div>
-          <div>
+          <div class="drink-info">
             <% let toppingsArr=[] %>
               <% for (topping of item.topping){ %>
                 <% toppingsArr.push(topping.toppingName) %>
@@ -71,17 +69,14 @@
                   
           <%})%>
         </section>
-        <div>Payment Method:</div>
-
-
-        <div>Subtotal: $<%=subtotal.toFixed(2)%></div>
-
-        <div>Taxes: $<%=(subtotal*0.13).toFixed(2)%></div>
-
-        <div>Total: $<%=(subtotal*1.13).toFixed(2)%></div>
-
-       <form action="/user/checkout" method="POST">
-         <button>Submit</button>
+        <section class="total-info">
+          <div>Payment Method: Cash In-store</div>
+          <div>Subtotal: $<%=subtotal.toFixed(2)%></div>
+          <div>Taxes: $<%=(subtotal*0.13).toFixed(2)%></div>
+          <div>Total: $<%=(subtotal*1.13).toFixed(2)%></div>
+        </section>
+          <form action="/user/checkout" method="POST">
+         <button>SUBMIT</button>
        </form>
       </section>
 

@@ -6,8 +6,13 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="/styles/navbar.css">
-  <link rel="stylesheet" href="/styles/register.css">
+<link rel="stylesheet" href="/styles/register.css">
 
   <title>Milkies</title>
 
@@ -18,12 +23,12 @@
     <div class="login-form">
 
       <form action="/user/login" method="POST">
-        <h1 class="login">Login</h1>
-        <p>Please enter your e-mail and password:</p>
-        <input type="email" name="email" id="email" placeholder="Email">
-        <input type="password" name="password" id="password" placeholder="Password">
-        <button class="login-btn">SIGN IN</button>
-        <p>Don't have an account? <a class="createacc" href="/user/register">Create one here.</a> </p>
+        <h1 class="login">LOGIN</h1>
+        <p class="login-text">Please enter your email and password</p>
+        <input type="email" name="email" id="email" placeholder="EMAIL">
+        <input type="password" name="password" id="password" placeholder="PASSWORD">
+        <button class="login-btn">LOGIN</button>
+        <p class="login-text">Don't have an account? <a class="createacc" href="/user/register">Create one here</a> </p>
       </form>
     </div>
 

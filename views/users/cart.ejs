@@ -6,8 +6,6 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
-
   <!-- Bootstrap -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
@@ -15,7 +13,12 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="/styles/navbar.css">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/styles/navbar.css">
   <link rel="stylesheet" href="/styles/cart.css">
 
   <title>Milkies</title>
@@ -24,8 +27,6 @@
 <body class="cart-body">
   <%- include('../partials/navbar.ejs') %>
 
-
-    <h1>Cart</h1>
     <% if (!id) {%>
       <h2>Empty bag. Please log in to place an order</h2>
       <% } %>
@@ -37,13 +38,10 @@
             <% if (id && cart.length>0) {%>
               <section class="cart">
 
-                <h2>Review your order</h2>
+                <h2 id="order-title">Review Your Order</h2>
                 <% for (let item of cartItems) {%>
                   <div class="card mb-3" style="max-width: 540px;">
                     <div class="row g-0">
-                      <div class="col-md-4">
-                        <img src=<%=item.image%> class="img-fluid rounded-start" alt="...">
-                      </div>
                       <div class="col-md-8">
                         <div class="card-body">
                           <h5 class="card-title">
@@ -70,14 +68,11 @@
 
                                       <% let drinkTotal=(4.99 + item.milkType[0].price + item.size[0].price+
                                         allToppings)*item.quantity %>
-                                        Total: <%=drinkTotal.toFixed(2)%>
+                                        Total: $<%=drinkTotal.toFixed(2)%>
                           </div>
-                          <span>
-                    <a href="/user/cart/<%=item.drinkId%>/edit">Edit</a>
-                    </span>
 
                   <form action="/user/cart/delete" method="POST">
-                    <button>Delete</button>
+                    <button class="delete-btn">Remove</button>
                   </form>
                         </div>
                       </div>

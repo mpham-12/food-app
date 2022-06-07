@@ -18,7 +18,7 @@ const seedMenu = [
     sugarLevel: '100%',
     iceLevel: 'Regular Ice',
     price: 4.99,
-    image: 'https://i.pinimg.com/564x/cc/1c/52/cc1c52cebabadbd9843d5cb6009a8e3e.jpg',
+    image: 'https://i.postimg.cc/cCHWF92s/milkt.png',
     description: 'Tapioca pearls add a pleasant texture to our signature milk tea, a best-selling fan favourite.'
   },
   {

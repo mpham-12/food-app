@@ -5,7 +5,14 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <link rel="stylesheet" href="/styles/navbar.css">
+      <!-- Fonts -->
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400&display=swap" rel="stylesheet">
+
+      <!-- Stylesheets -->
+      <link rel="stylesheet" href="/styles/navbar.css">
+      <link rel="stylesheet" href="/styles/orderHistory.css">
 
   <title>Milkies</title>
 
@@ -14,8 +21,6 @@
 <%- include('../partials/navbar.ejs') %>
 <body>
   
-
-
   <h1>ORDER HISTORY</h1>
 
   <%if (pastOrders.length===0){%>
@@ -24,10 +29,6 @@
   <% for (let order of pastOrders){ %>
     <div>   
       <%=order.orderedAt%>
-      <%=order.customerId.firstName%>
-        <%=order.customerId.lastName%>
-       email:  <%=order.customerId.email%>
-      customer phone number: <%=order.customerId.phoneNumber%>
     </div>
     <%for (let drink of order.orderItems) {%>
       <%=drink.quantity%> x <%=drink.drinkName%>
@@ -42,7 +43,7 @@
 
 </div>
     <% } %>
-    total: <%=order.total%>
+    Total: <%=order.total%>
     <% } %>
     <% } %>
     

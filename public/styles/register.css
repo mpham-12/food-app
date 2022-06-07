@@ -1,6 +1,7 @@
 .register-body{
 height: 100vh;
 margin: 0;
+font-family: 'Noto Sans JP', sans-serif;
 }
 
 form{
@@ -26,4 +27,27 @@ button{
   background-color: #f0d42c;
   border: 1px solid #f0d42c;
   border-radius: 5px;
+}
+
+h1.login{
+font-weight: 400;
+}
+
+p.login-text {
+  font-weight: 100;
+}
+
+::placeholder{
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 100;
+}
+
+.login-btn {
+  font-family: 'Noto Sans JP', sans-serif;
+font-weight: 300;
+}
+
+.createacc {
+  text-decoration: none;
+  font-weight: 300;
 }

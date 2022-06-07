@@ -5,9 +5,15 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Stylesheets -->
   <link rel="stylesheet" href="/styles/navbar.css">
   <link rel="stylesheet" href="/styles/menuShow.css">
 
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400&display=swap" rel="stylesheet">
 
   <title>Milkies</title>
 </head>
@@ -16,130 +22,128 @@
   <body class="menu-body">
     <container class="show-container">
 
-    <section class="show-left">
-      <img src=<%=drink.image %> alt="" style='height:400px'>
-      <div>
-        <%= drink.drinkName %>
-      </div>
-      <div>
-        <%= drink.description %>
-      </div>
-      <div>
-        Starting at <%= drink.price %>
-      </div>
-    </section>
+      <section class="show-left">
+        <img class="drink-img" src=<%=drink.image %> alt="" style='height:400px'>
+        <div class="drink-name">
+          <h1>
+            <%= drink.drinkName %>
+          </h1>
+        </div>
+        <div>
+          <%= drink.description %>
+        </div>
+        <div>
+          <b>Starting at <%= drink.price %></b> 
+        </div>
+      </section>
 
-    <section class="show-right">
+      <section class="show-right">
 
-      <form class="submit-form" action="/menu/<%=drink._id%>" method="POST">
-        
-      <div>
-        <label class="form-label" for="qty">Qty</label>
-        <input class="calculate" type="number" id="quantity" name="quantity" min="1" value="1">
-      </div>
-      
-      <h2>Select a size</h2>
-      <div>
-        <% for (size of sizes) {%>
+        <form class="submit-form" action="/menu/<%=drink._id%>" method="POST">
+          <h2>Select a Size:</h2>
           <div>
-          <input type="radio" id="size" name="size" value="<%=size.size%>" >
-            <%=size.size%> +$<%=size.price%>
+            <% for (size of sizes) {%>
+              <div>
+                <input type="radio" id="size" name="size" value="<%=size.size%>">
+                <%=size.size%> +$<%=size.price%>
+
+              </div>
+              <%}%>
+          </div>
+
+          <div>
+            <h2 class="form-label" for="sugarLevel">Choose your Sugar Level:</h2>
+            <input type="radio" id="sugarLevel" name="sugarLevel" value="100%">
+            <label for="sugarLevel">
+              100% Sugar
+            </label>
+            <input type="radio" id="sugarLevel" name="sugarLevel" value="80%">
+            <label for="sugarLevel">
+              80% Sugar
+            </label>
+            <input type="radio" id="sugarLevel" name="sugarLevel" value="50%">
+            <label for="sugarLevel">
+              50% Sugar
+            </label>
+            <input type="radio" id="option1" name="sugarLevel" value="30%">
+            <label for="sugarLevel">
+              30% Sugar
+            </label>
+            <input type="radio" id="option1" name="sugarLevel" value="0%">
+            <label for="sugarLevel">
+              0% Sugar
+            </label>
+          </div>
+
+          <div>
+            <h2 class="form-label" for="iceLevel">Choose your Ice Level:</h2>
+            <input type="radio" id="option1" name="iceLevel" value="Normal Ice">
+            <label for="iceLevel">
+              Normal Ice
+            </label>
+            <input type="radio" id="option1" name="iceLevel" value="Less Ice">
+            <label for="iceLevel">
+              Less Ice
+            </label>
+            <input type="radio" id="option1" name="iceLevel" value="Eextra Ice">
+            <label for="iceLevel">
+              Extra Ice
+            </label>
+            <input type="radio" id="option1" name="iceLevel" value="No Ice">
+            <label for="iceLevel">
+              No Ice
+            </label>
+          </div>
+
+          <h2>Choose your Milk:</h2>
+          <div>
+            <% for (milk of milks) {%>
+              <div>
+                <input type="radio" id="milkType" name="milkType" value="<%=milk.milkName%>">
+                <%=milk.milkName%> +$<%=milk.price%>
+              </div>
+              <%}%>
+          </div>
+
+          <h2>Choose your Toppings: </h2>
+          <div>
+            <% for (topping of toppings) {%>
+              <div>
+                <input type="checkbox" id="topping" name="topping" value="<%=topping.toppingName%>">
+                <%=topping.toppingName%> +$<%=topping.price%>
+              </div>
+              <%}%>
+          </div>
+
+          <div>
+            <h2 class="form-label" for="sugarLevel">Quantity:</h2>
+            <input class="calculate" type="number" id="quantity" name="quantity" min="1" value="1">
+          </div>
+
+           <!-- <b><p id="total-price"> Total:</b> <span class="drink-price"><%=drink.price%></span></p> -->
           
-        </div>
-          <%}%>
-        </div>
-
-      <div>
-        <h2 class="form-label" for="sugarLevel">Choose your Sugar Level</h2>
-        <input type="radio" id="sugarLevel" name="sugarLevel" value="100%">
-        <label for="sugarLevel">
-          100% Sugar
-        </label>
-        <input type="radio" id="sugarLevel" name="sugarLevel" value="80%">
-        <label for="sugarLevel">
-          80% Sugar
-        </label>
-        <input type="radio" id="sugarLevel" name="sugarLevel" value="50%">
-        <label for="sugarLevel">
-          50% Sugar
-        </label>
-        <input type="radio" id="option1" name="sugarLevel" value="30%">
-        <label for="sugarLevel">
-          30% Sugar
-        </label>
-        <input type="radio" id="option1" name="sugarLevel" value="0%">
-        <label for="sugarLevel">
-          0% Sugar
-        </label>
-      </div>
-
-      <div>
-        <h2 class="form-label" for="iceLevel">Choose your Ice Level</h2>
-        <input type="radio" id="option1" name="iceLevel" value="Normal Ice">
-        <label for="iceLevel">
-          Normal Ice
-        </label>
-        <input type="radio" id="option1" name="iceLevel" value="Less Ice">
-        <label for="iceLevel">
-          Less Ice
-        </label>
-        <input type="radio" id="option1" name="iceLevel" value="Eextra Ice">
-        <label for="iceLevel">
-          Extra Ice
-        </label>
-        <input type="radio" id="option1" name="iceLevel" value="No Ice">
-        <label for="iceLevel">
-          No Ice
-        </label>
-      </div>
-
-      <h2>Choose your milk:</h2>
-      <div>
-        <% for (milk of milks) {%>
-          <div>
-          <input type="radio" id="milkType" name="milkType" value="<%=milk.milkName%>">
-              <%=milk.milkName%> +$<%=milk.price%>
-          </div>
-          <%}%>
-      </div>
-
-<h2>Choose your toppings: </h2>
-      <div>
-        <% for (topping of toppings) {%>
-          <div>
-          <input type="checkbox" id="topping" name="topping" value="<%=topping.toppingName%>">
-              <%=topping.toppingName%> +$<%=topping.price%>
-          </div>
-          <%}%>
-      </div>
+          <button type="submit" id="cart-btn">ADD TO ORDER <span class="drink-price"><%=drink.price%></span> </button>
 
 
-      <p id="total-price"> Total: <%=drink.price%>
-      </p>
+          <% if (id && user.isAdmin){ %>
 
-      <button type="submit" id="cart-btn">Add to Order</button>
+            <div> Sugar Level: <%=drink.sugarLevel%>
+            </div>
+            <div>Ice Level: <%=drink.iceLevel%>
+            </div>
+            </div>
 
+            <a href="/menu/<%=drink._id%>/edit">EDIT DRINK
+            </a>
 
+            <form action="/menu/<%=drink._id%>/delete" method="POST">
+              <button>DELETE</button>
+            </form>
 
-      <% if (id && user.isAdmin){ %>
-
-        <div> Sugar Level: <%=drink.sugarLevel%>
-        </div>
-        <div>Ice Level: <%=drink.iceLevel%>
-        </div>
-        </div>
-
-        <a href="/menu/<%=drink._id%>/edit">EDIT DRINK
-        </a>
-
-        <form action="/menu/<%=drink._id%>/delete" method="POST">
-          <button>DELETE</button>
+            <% } %>
         </form>
-
-        <% } %>
-    </form>
-  </section>
-</container>
+      </section>
+    </container>
 
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"

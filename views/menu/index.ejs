@@ -12,27 +12,40 @@
   <!-- Bootstrap -->
   <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> -->
-  <title>Menu</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400&display=swap" rel="stylesheet">
+  
+    <title>Menu</title>
 
 </head>
 <%- include('../partials/navbar.ejs') %>
 
   <body class="menu-body">
-    <h1>Milkies Menu</h1>
-
+    <div class="menu-title">
+    <h1>Milkies Boba</h1>
+    <p id="address">111 Boba Ave, Vaughan, On, B0B 4V3</p>
+    <span id="menu-sched">Scheduled Pick-up Orders Only</span> 
+</div>
     <section class="card-container">
     <% for (let item of menuItems){ %>
-      <div class="card" style="width: 18rem;">
+      <div class="card">
+
         <a href="/menu/<%=item._id%>" class="card-btn">
-        <img src=<%=item.image %> class="card-img-top" alt="...">
+
+            <img src=<%=item.image %> class="card-img-top" alt="...">
+
         <div class="card-body">
           <h2 class="card-title"><%=item.drinkName %></h2>
           <p class="card-text"><%=item.description %></p>
-          <p>$<%=item.price %></p>
-        </a>
+          <p>Starting at $<%=item.price %></p>
         </div>
-      </div>
 
+        
+      </a>
+      </div>
         <% } %>
       </section>
   </body>
