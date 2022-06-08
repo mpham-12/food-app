@@ -46,6 +46,22 @@ h2{
   margin-bottom: 20px;
 }
 
+.checkout-btn{
+text-decoration: none;
+  margin-top: 10px;
+  background-color: #f0d42c;
+  border: 1px solid #f0d42c;
+  border-radius: 5px;
+  text-align: center;
+  padding: 10px 20px;
+  color: black;
+  font-weight: 300;
+  margin-bottom: 80px;
+}
+.checkout-btn:hover{
+  color: black;
+}
+
 .back{
 text-decoration: none;
 padding: 5px 20px;
@@ -54,3 +70,16 @@ border: 1px solid #f0d42c;
 border-radius: 5px;
 color: black;
 }
+
+@media only screen and (max-width: 600px) {
+  .card{
+    width: 80%;
+    margin: 0px 20px;
+  }
+.card-body{
+  width: 100%;
+}
+  .card-text{
+    width: 90%;
+  }
+  }
