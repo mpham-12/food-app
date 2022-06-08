@@ -5,39 +5,67 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="/styles/navbar.css">
+  <link rel="stylesheet" href="/styles/adminOrders.css">
+
   <title>Document</title>
 </head>
 
-<body>
+<%- include('../partials/navbar.ejs') %>
 
-  <h1>ORDER HISTORY</h1>
+  <body>
 
+    <section class="order-con">
+
+      <h1>ORDER HISTORY</h1>
+      <section class="order">
+        
   <% for (let order of orders){ %>
-    <div>   
-      <%=order.orderedAt%>
-      <%=order.customerId.firstName%>
-        <%=order.customerId.lastName%>
-       email:  <%=order.customerId.email%>
-      customer phone number: <%=order.customerId.phoneNumber%>
-    </div>
-    <%for (let drink of order.orderItems) {%>
-      <%=drink.quantity%> x <%=drink.drinkName%>
-      <%=drink.size[0].size%>,  <%=drink.milkType[0].milkName%>, <%=drink.sugarLevel%> Sugar, <%=drink.iceLevel%>,
-
-      <%let toppingsArr = [];%>
-       <% for (topping of drink.topping){%>
-        <% toppingsArr.push(topping.toppingName)%>
-        <% }%>
-        <%=toppingsArr.join(", ")%>
-<div>
-
+    <div>
+      <div class="order-detail">
+        <span>Ordered At:</span>
+          <%=order.orderedAt%>
+        </div>
+        <div class="order-detail">
+          <span>Name:</span>
+          <%=order.customerId.firstName%>
+          <%=order.customerId.lastName%>
+        </div>
+        <div class="order-detail">
+          <span>Email:</span>
+          email: <%=order.customerId.email%>
+        </div>
+        <div class="order-detail">
+          <span>Phone Number:</span>
+          <%=order.customerId.phoneNumber%>
+        </div>
+      </div>
+      <div class="order-detail">
+        <p>Order:</p>
+        <%for (let drink of order.orderItems) {%>
+          <%=drink.quantity%> x <%=drink.drinkName%>
+              <%=drink.size[0].size%>, <%=drink.milkType[0].milkName%>, <%=drink.sugarLevel%> Sugar, <%=drink.iceLevel%>,
+              
+              <%let toppingsArr=[];%>
+              <% for (topping of drink.topping){%>
+                          <% toppingsArr.push(topping.toppingName)%>
+                          <% }%>
+                          <%=toppingsArr.join(", ")%>
+      </div>
+<div class="order-detail">
+  
 </div>
-    <% } %>
-    total: <%=order.total%>
-    <% } %>
-    
+<% } %>
+<div>
+  <span class="total"> Total: </span>$<%=order.total.toFixed(2)%>
+</div>
+<% } %>
+</section>
+</section>
 
 
-</body>
 
-</html>
+  </body>
+
+  </html>
