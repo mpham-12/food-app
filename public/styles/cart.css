@@ -35,3 +35,22 @@
 .card-body{
   width: 500px;
 }
+
+.empty-msg{
+  text-align: center;
+  margin-top: 150px;
+}
+
+h2{
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.back{
+text-decoration: none;
+padding: 5px 20px;
+background-color: #f0d42c;
+border: 1px solid #f0d42c;
+border-radius: 5px;
+color: black;
+}

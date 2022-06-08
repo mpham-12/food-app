@@ -28,11 +28,17 @@
   <%- include('../partials/navbar.ejs') %>
 
     <% if (!id) {%>
-      <h2>Empty bag. Please log in to place an order</h2>
+      <div class="empty-msg">
+        <h2>Please log in to place an order.</h2>
+        <a class="back" href="/user/login">Log in</a>
+      </div>
       <% } %>
 
         <% if (id && cart.length===0) {%>
-          <h3> Hi <%=user.firstName %>, your cart is empty. </h3>
+          <div class="empty-msg">
+            <h2> Hi <%=user.firstName %>, your cart is empty. </h2>
+            <a class="back" href="/menu">Return to Menu</a>
+          </div>
           <% } %>
 
             <% if (id && cart.length>0) {%>
