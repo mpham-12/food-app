@@ -54,7 +54,7 @@ button#cart-btn {
 }
 
 .drink-img{
-padding-left: 150px;
+padding-left: 80px;
 }
 
 .menu-btn {
@@ -75,7 +75,7 @@ span.drink-price {
   padding-left: 40px;
 }
 
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 800px) {
   .show-container{
     display: flex;
     flex-direction: column;

@@ -44,7 +44,7 @@
           <div>
             <% for (size of sizes) {%>
               <div>
-                <input type="radio" id="size" name="size" value="<%=size.size%>">
+                <input type="radio" id="size" name="size" value="<%=size.size%>" required>
                 <%=size.size%> +$<%=size.price%>
 
               </div>
@@ -53,23 +53,23 @@
 
           <div>
             <h2 class="form-label" for="sugarLevel">Choose your Sugar Level:</h2>
-            <input type="radio" id="sugarLevel" name="sugarLevel" value="100%">
+            <input type="radio" id="sugarLevel" name="sugarLevel" value="100%" required>
             <label for="sugarLevel">
               100% Sugar
             </label>
-            <input type="radio" id="sugarLevel" name="sugarLevel" value="80%">
+            <input type="radio" id="sugarLevel" name="sugarLevel" value="80%" required>
             <label for="sugarLevel">
               80% Sugar
             </label>
-            <input type="radio" id="sugarLevel" name="sugarLevel" value="50%">
+            <input type="radio" id="sugarLevel" name="sugarLevel" value="50%" required>
             <label for="sugarLevel">
               50% Sugar
             </label>
-            <input type="radio" id="option1" name="sugarLevel" value="30%">
+            <input type="radio" id="option1" name="sugarLevel" value="30%" required>
             <label for="sugarLevel">
               30% Sugar
             </label>
-            <input type="radio" id="option1" name="sugarLevel" value="0%">
+            <input type="radio" id="option1" name="sugarLevel" value="0%" required>
             <label for="sugarLevel">
               0% Sugar
             </label>
@@ -77,19 +77,19 @@
 
           <div>
             <h2 class="form-label" for="iceLevel">Choose your Ice Level:</h2>
-            <input type="radio" id="option1" name="iceLevel" value="Normal Ice">
+            <input type="radio" id="option1" name="iceLevel" value="Normal Ice" required>
             <label for="iceLevel">
               Normal Ice
             </label>
-            <input type="radio" id="option1" name="iceLevel" value="Less Ice">
+            <input type="radio" id="option1" name="iceLevel" value="Less Ice" required>
             <label for="iceLevel">
               Less Ice
             </label>
-            <input type="radio" id="option1" name="iceLevel" value="Eextra Ice">
+            <input type="radio" id="option1" name="iceLevel" value="Extra Ice" required>
             <label for="iceLevel">
               Extra Ice
             </label>
-            <input type="radio" id="option1" name="iceLevel" value="No Ice">
+            <input type="radio" id="option1" name="iceLevel" value="No Ice" required>
             <label for="iceLevel">
               No Ice
             </label>
@@ -99,7 +99,7 @@
           <div>
             <% for (milk of milks) {%>
               <div>
-                <input type="radio" id="milkType" name="milkType" value="<%=milk.milkName%>">
+                <input type="radio" id="milkType" name="milkType" value="<%=milk.milkName%>" required>
                 <%=milk.milkName%> +$<%=milk.price%>
               </div>
               <%}%>
@@ -107,17 +107,35 @@
 
           <h2>Choose your Toppings: </h2>
           <div>
-            <% for (topping of toppings) {%>
               <div>
-                <input type="checkbox" id="topping" name="topping" value="<%=topping.toppingName%>">
-                <%=topping.toppingName%> +$<%=topping.price%>
+                <input type="checkbox" id="topping" name="topping" value="No Topping" checked>
+                None +$0.00
               </div>
-              <%}%>
+              <div>
+                <input type="checkbox" id="topping" name="topping" value="Pearls" >
+                Pearls +$0.80
+              </div>
+              <div>
+                <input type="checkbox" id="topping" name="topping" value="Brown Sugar Pearls" >
+                Brown Sugar Pearls +$0.80
+              </div>
+              <div>
+                <input type="checkbox" id="topping" name="topping" value="Grass Jelly" >
+                Grass Jelly +$0.80
+              </div>
+              <div>
+                <input type="checkbox" id="topping" name="topping" value="Coconut Jelly" >
+                Coconut Jelly +$0.80
+              </div>
+              <div>
+                <input type="checkbox" id="topping" name="topping" value="Pudding" >
+                Pudding +$0.80
+              </div>
           </div>
 
           <div>
             <h2 class="form-label" for="sugarLevel">Quantity:</h2>
-            <input class="calculate" type="number" id="quantity" name="quantity" min="1" value="1">
+            <input class="calculate" type="number" id="quantity" name="quantity" min="1" value="1" required>
           </div>
 
            <!-- <b><p id="total-price"> Total:</b> <span class="drink-price"><%=drink.price%></span></p> -->
@@ -149,6 +167,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
       integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="/scripts/menuShow.js"></script>
+
   </body>
 
 </html>

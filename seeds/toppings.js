@@ -14,6 +14,10 @@ mongoose.connect('mongodb://localhost:27017/food-app', {
 
 const seedToppings = [
   {
+    toppingName: 'No Topping',
+    price: 0.00
+  },
+  {
     toppingName: 'Pearls',
     price: 0.80
   },
