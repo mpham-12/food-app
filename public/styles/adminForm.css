@@ -71,3 +71,18 @@ label{
   border: 1px solid #f0d42c;
   border-radius: 5px;
 }
+
+@media only screen and (max-width: 500px) {
+  form{
+    width: 90%;
+  }
+input{
+  width: 95%;
+}
+textarea{
+  width: 95%;
+}
+select{
+  width: 95%;
+}
+}
