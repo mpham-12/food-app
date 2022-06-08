@@ -82,7 +82,7 @@ router.get('/:drinkId/edit', async (req, res) => {
 	const drink = await Menu.findById(drinkId);
 	if (id && user.isAdmin) {
 		console.log('DRINK--------', drink);
-		res.render('admin/edit', { drink });
+		res.render('admin/edit', { drink, id, user });
 	} else {
 		res.send('you cannot perform this action');
 	}
