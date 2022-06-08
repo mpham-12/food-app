@@ -1,96 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Bootstrap -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
+
   <link rel="stylesheet" href="/styles/navbar.css">
+  <link rel="stylesheet" href="/styles/adminForm.css">
+
 
 
   <title>Milkies</title>
 </head>
+
 <body>
-  <h1>Edit Drink</h1>
+  <section class="form-body">
 
-  <form action="/menu/<%=drink._id%>/edit" method="POST">
+    <h1>Edit Drink</h1>
 
-    <div class="input-group mb-3">
-      <label for="">Drink Name</label>
-      <input type="text" name="drinkName" value="<%=drink.drinkName %>" id="drinkName" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-    </div>
+    <form action="/menu/<%=drink._id%>/edit" method="POST">
 
-    <div class="input-group mb-3">
-      <label for="">Image</label>
-      <input type="text" name="image" value="<%=drink.image %>" id="image" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-    </div>
+      <div class="input-group mb-3">
+        <div><label for="">Drink Name</label></div>
+        <input type="text" name="drinkName" value="<%=drink.drinkName %>" id="drinkName" class="form-control"
+          aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+      </div>
 
-    <div class="form-floating">
-      <label for="floatingTextarea">Description</label>
-      <textarea name="description" id="description" class="form-control" placeholder="Description" id="floatingTextarea"><%=drink.description %> </textarea>
-    </div>
+      <div class="input-group mb-3">
+        <div><label for="">Image Link</label></div>
+        <input type="text" name="image" value="<%=drink.image %>" id="image" class="form-control"
+          aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+      </div>
 
-    <div class="size"></div>
-      <label class="form-label" for="size">Choose your Size</label>
+      <div class="form-floating">
+        <div><label for="floatingTextarea">Description</label></div>
+        <textarea name="description" id="description" class="form-control" placeholder="Description"
+          id="floatingTextarea"><%=drink.description %> </textarea>
+      </div>
+
+      <div><label class="form-label" for="size">Choose your Size</label></div>
       <select class="form-control calculate" type="text" id="size" name="size" required>
-          <option data-price="0" selected value="Regular">Regular</option>
-          <option data-price="0.69" value="Large">Large +0.69</option>
-          <option data-price="1.69" value="Jumbo">Jumbo +1.69</option>
+        <option data-price="0" selected value="Regular">Regular</option>
+        <option data-price="0.69" value="Large">Large +0.69</option>
+        <option data-price="1.69" value="Jumbo">Jumbo +1.69</option>
       </select>
-  </div>
- 
-  <div>
-    <label class="form-label" for="sugarLevel">Choose your Sugar Level</label>
-    <select class="form-control" type="text" id="sugarLevel" name="sugarLevel" required>
-        <option selected value="100%">100%</option>
-        <option value="80%">80%</option>
-        <option value="50%">50%</option>
-        <option value="30%">30%</option>
-        <option value="0%">0%</option>
-    </select>
-</div>
+      </div>
 
-<div>
-  <label class="form-label" for="iceLevel">Choose your Ice Level</label>
-  <select class="form-control" type="text" id="iceLevel" name="iceLevel" required>
-      <option selected value="Regular Ice">Regular Ice</option>
-      <option value="Less Ice">Less Ice</option>
-      <option value="Extra Ice">Extra Ice</option>
-      <option value="No Ice">No Ice</option>
-  </select>
-</div>
+      <div>
+        <div><label class="form-label" for="sugarLevel">Choose your Sugar Level</label></div> <select
+          class="form-control" type="text" id="sugarLevel" name="sugarLevel" required>
+          <option selected value="100%">100%</option>
+          <option value="80%">80%</option>
+          <option value="50%">50%</option>
+          <option value="30%">30%</option>
+          <option value="0%">0%</option>
+        </select>
+      </div>
 
-<div>
-  <label class="form-label" for="milkType">Choose your Milk</label>
-  <select class="form-control calculate" type="text" id="milkType" name="milkType" required>
-      <option data-price="0" selected value="2% Milk">2% Milk</option>
-      <option data-price="0.65" value="Oat Milk">Oat Milk +0.65</option>
-      <option data-price="0.65" value="Soy Milk">Soy Milk +0.65</option>
-      <option data-price="0.65" value="Almond Milk">Almond Milk +0.65</option>
-  </select>
-</div>
+      <div>
+        <div><label class="form-label" for="iceLevel">Choose your Ice Level</label></div> <select class="form-control"
+          type="text" id="iceLevel" name="iceLevel" required>
+          <option selected value="Regular Ice">Regular Ice</option>
+          <option value="Less Ice">Less Ice</option>
+          <option value="Extra Ice">Extra Ice</option>
+          <option value="No Ice">No Ice</option>
+        </select>
+      </div>
 
-<div>
-  <label class="form-label" for="iceLevel">Choose your Topping</label>
-  <select class="form-control calculate" type="text" id="toppings" name="toppings" required>
-      <option data-price="0" selected value="None">None</option>
-      <option data-price="0.8" value="Pearls">Pearls +0.80</option>
-      <option data-price="0.8" value="Brown Sugar Pearls">Brown Sugar Pearls +0.80</option>
-      <option data-price="0.8" value="Grass Jelly">Grass Jelly +0.80</option>
-      <option data-price="0.8" value="Coconut Jelly">Coconut Jelly +0.80</option>
-      <option data-price="0.8" value="Pudding">Pudding +0.80</option>
-  </select>
-</div>
+      <div>
+        <div><label class="form-label" for="milkType">Choose your Milk</label></div> <select
+          class="form-control calculate" type="text" id="milkType" name="milkType" required>
+          <option data-price="0" selected value="2% Milk">2% Milk</option>
+          <option data-price="0.65" value="Oat Milk">Oat Milk +0.65</option>
+          <option data-price="0.65" value="Soy Milk">Soy Milk +0.65</option>
+          <option data-price="0.65" value="Almond Milk">Almond Milk +0.65</option>
+        </select>
+      </div>
 
-<div class="input-group mb-3">
-  <label for="">Price</label>
-  <input type="text" name="price" value="<%=drink.price %>"id="price" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-</div>
+      <div>
+        <div><label class="form-label" for="iceLevel">Choose your Topping</label></div>
+        <select class="form-control calculate" type="text" id="toppings" name="toppings" required>
+          <option data-price="0" selected value="None">None</option>
+          <option data-price="0.8" value="Pearls">Pearls +0.80</option>
+          <option data-price="0.8" value="Brown Sugar Pearls">Brown Sugar Pearls +0.80</option>
+          <option data-price="0.8" value="Grass Jelly">Grass Jelly +0.80</option>
+          <option data-price="0.8" value="Coconut Jelly">Coconut Jelly +0.80</option>
+          <option data-price="0.8" value="Pudding">Pudding +0.80</option>
+        </select>
+      </div>
 
-<button>Add</button>
-  </form>
+      <div class="input-group mb-3">
+        <div><label for="">Price</label></div>
+        <input type="text" name="price" value="<%=drink.price %>" id="price" class="form-control"
+          aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+      </div>
+
+      <div class="button-con">
+  <button class="button">Update</button>
+</div>
+    </form>
+  </section>
 </body>
+
 </html>

@@ -6,16 +6,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link rel="stylesheet" href="/styles/navbar.css">
+  <link rel="stylesheet" href="/styles/adminHome.css">
 
 
   <title>Milkies Admin</title>
 </head>
-<body>
-  <h1>Admin Page</h1>
 
-  <a href="/admin/new">Add Product</a>
-  <a href="/menu">Edit Products</a>
-  <a href="/admin/orders">Order History</a>
+<%- include('../partials/navbar.ejs') %>
 
+<body class="admin-body">
+  <section class="body">
+
+    <h1>Admin Page</h1>
+    <div class="links-con">
+
+      <a class="link" href="/admin/new">Add Product</a>
+      <a class="link" href="/menu">Edit Products</a>
+      <a class="link" href="/admin/orders">All Orders</a>
+    </div>
+      
+  </section>
 </body>
 </html>

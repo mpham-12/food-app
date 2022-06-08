@@ -8,7 +8,7 @@ router.get('/', async (req, res) => {
 	const id = req.session.user_id;
 	const user = await User.findById(id);
 	if (id && user.isAdmin) {
-		res.render('admin/home');
+		res.render('admin/home', {id, user});
 	} else {
 		res.send('no access. sorry homeboy');
 	}
@@ -44,6 +44,8 @@ router.post('/new', async (req, res) => {
 });
 
 router.get('/orders', async (req, res) => {
+	const id = req.session.user_id;
+	const user = await User.findById(id);
 	const orders = await Order.find().populate('customerId')
 	let toppingsArr = [];
 	// console.log('ORDERS', orders[0])
@@ -62,7 +64,7 @@ router.get('/orders', async (req, res) => {
 	// 	}
 	// }
 	// console.log('toppingsArr', toppingsArr)
-	res.render('admin/orders', { orders, toppingsArr })
+	res.render('admin/orders', { orders, toppingsArr, id, user })
 })
 
 module.exports = router;
