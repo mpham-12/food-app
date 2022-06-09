@@ -33,10 +33,11 @@
           <%= drink.description %>
         </div>
         <div>
-          <b>Starting at <%= drink.price %></b> 
+          <b>Starting at <%= drink.price %></b>
         </div>
       </section>
 
+      
       <section class="show-right">
 
         <form class="submit-form" action="/menu/<%=drink._id%>" method="POST">
@@ -107,30 +108,30 @@
 
           <h2>Choose your Toppings: </h2>
           <div>
-              <div>
-                <input type="checkbox" id="topping" name="topping" value="No Topping" checked>
-                None +$0.00
-              </div>
-              <div>
-                <input type="checkbox" id="topping" name="topping" value="Pearls" >
-                Pearls +$0.80
-              </div>
-              <div>
-                <input type="checkbox" id="topping" name="topping" value="Brown Sugar Pearls" >
-                Brown Sugar Pearls +$0.80
-              </div>
-              <div>
-                <input type="checkbox" id="topping" name="topping" value="Grass Jelly" >
-                Grass Jelly +$0.80
-              </div>
-              <div>
-                <input type="checkbox" id="topping" name="topping" value="Coconut Jelly" >
-                Coconut Jelly +$0.80
-              </div>
-              <div>
-                <input type="checkbox" id="topping" name="topping" value="Pudding" >
-                Pudding +$0.80
-              </div>
+            <div>
+              <input type="checkbox" id="topping" name="topping" value="No Topping" checked>
+              No Topping +$0.00
+            </div>
+            <div>
+              <input type="checkbox" id="topping" name="topping" value="Pearls">
+              Pearls +$0.80
+            </div>
+            <div>
+              <input type="checkbox" id="topping" name="topping" value="Brown Sugar Pearls">
+              Brown Sugar Pearls +$0.80
+            </div>
+            <div>
+              <input type="checkbox" id="topping" name="topping" value="Grass Jelly">
+              Grass Jelly +$0.80
+            </div>
+            <div>
+              <input type="checkbox" id="topping" name="topping" value="Coconut Jelly">
+              Coconut Jelly +$0.80
+            </div>
+            <div>
+              <input type="checkbox" id="topping" name="topping" value="Pudding">
+              Pudding +$0.80
+            </div>
           </div>
 
           <div>
@@ -138,27 +139,29 @@
             <input class="calculate" type="number" id="quantity" name="quantity" min="1" value="1" required>
           </div>
 
-           <!-- <b><p id="total-price"> Total:</b> <span class="drink-price"><%=drink.price%></span></p> -->
-          
-          <button type="submit" id="cart-btn">ADD TO ORDER <span class="drink-price"><%=drink.price%></span> </button>
-
-
-          <% if (id && user.isAdmin){ %>
-
-            <div> Sugar Level: <%=drink.sugarLevel%>
+          <% if(!user) {%>
+            <div class="login-to-order">
+              <a href="/user/login">LOGIN TO ORDER</a>
             </div>
-            <div>Ice Level: <%=drink.iceLevel%>
-            </div>
-            </div>
+            <% } else {%>
+              <button type="submit" id="cart-btn">ADD TO ORDER <span class="drink-price">
+                  <%=drink.price%>
+                </span> </button>
 
-            <a class="edit-btn" href="/menu/admin/<%=drink._id%>/edit">EDIT
-            </a>
+              <% } %>
 
-            <form action="/menu/<%=drink._id%>/delete" method="POST">
-              <button class="delete-btn">DELETE</button>
-            </form>
 
-            <% } %>
+
+                <% if (id && user.isAdmin){ %>
+
+                  <a class="edit-btn" href="/menu/admin/<%=drink._id%>/edit">EDIT
+                  </a>
+
+                  <form action="/menu/<%=drink._id%>/delete" method="POST">
+                    <button class="delete-btn">DELETE</button>
+                  </form>
+
+                  <% } %>
         </form>
       </section>
     </container>

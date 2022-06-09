@@ -23,7 +23,7 @@
         
   <% for (let order of orders){ %>
     <div>
-      <div class="order-detail">
+      <div class="order-detail" id="order-deets">
         <span>Order ID:</span> 
         <%= order.orderId%>
       </div>
@@ -38,7 +38,7 @@
         </div>
         <div class="order-detail">
           <span>Email:</span>
-          email: <%=order.customerId.email%>
+          <%=order.customerId.email%>
         </div>
         <div class="order-detail">
           <span>Phone Number:</span>
@@ -68,8 +68,5 @@
 </section>
 </section>
 
-
-
   </body>
-
   </html>
