@@ -1,0 +1,14 @@
+.thank-you-body {
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+.thank-you{
+  margin-top: 80px;
+  text-align: center;
+}
+
+.menu-back {
+  text-align: center;
+  text-decoration: none;
+  color: rgb(80, 167, 145);
+}

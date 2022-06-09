@@ -6,6 +6,9 @@ const OrderSchema = new Schema({
 				type: Schema.Types.ObjectId,
 		ref: 'User'
 	},
+	orderId: {
+		type: String
+	},
 	orderItems: [
 		{
 			drinkName: String,

@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="/styles/navbar.css">
   <link rel="stylesheet" href="/styles/adminOrders.css">
 
-  <title>Document</title>
+  <title>Milkies Admin</title>
 </head>
 
 <%- include('../partials/navbar.ejs') %>
@@ -23,6 +23,10 @@
         
   <% for (let order of orders){ %>
     <div>
+      <div class="order-detail">
+        <span>Order ID:</span> 
+        <%= order.orderId%>
+      </div>
       <div class="order-detail">
         <span>Ordered At:</span>
           <%=order.orderedAt.toString().slice(0, -32)%>

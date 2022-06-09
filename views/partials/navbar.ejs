@@ -1,4 +1,4 @@
-<nav>
+<!-- <nav>
   <div class="section">
     <a class="nav-link" href="/menu">MENU</a>
   </div>
@@ -22,4 +22,31 @@
         </form>
         <%}%>
       </div>
+</nav> -->
+
+<nav>
+  <div class="topnav">
+    <div class="menu-left">
+      <a href="/"><img class='navbar-logo' src="/images/logo.png" alt=""></a>
+      <span class="menu-text"><a class="menu-item" href="/menu">MENU</a></span>
+
+    </div>
+
+    <div class="menu-right">
+      <% if (id && !user.isAdmin){ %>
+        <a href="/user/cart" class="split">CART</a>
+        <a href="/user" class="split">MY ACCOUNT</a>
+        <% } %>
+          <% if (id && user.isAdmin){ %>
+            <a href="/admin" class="split">ADMIN</a>
+            <% } %>
+              <%if(!id){%>
+                <a href="/user/login" class="split">LOGIN</a>
+                <%} else {%>
+                  <form action="/user/logout" method="POST">
+                    <button class="split">LOGOUT</button>
+                  </form>
+                  <%}%>
+    </div>
+  </div>
 </nav>

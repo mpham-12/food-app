@@ -9,6 +9,7 @@ const Milk = require('../models/milk');
 const Size = require('../models/size');
 const Order = require('../models/orders');
 
+//Get user profile information
 router.get('/', async (req, res) => {
 	const id = req.session.user_id;
 	const admin = await User.find({ admin: true });
@@ -19,6 +20,7 @@ router.get('/', async (req, res) => {
 		res.render('users/account', { user, id, admin });
 });
 
+//Edit user information
 router.put('/', async (req, res) => {
 	const id = req.session.user_id;
 	const newFirstName = req.body.firstName
@@ -37,11 +39,13 @@ router.put('/', async (req, res) => {
 	res.status(201).send();
 });
 
+//Get register page
 router.get('/register', (req, res) => {
 	const id = req.session.user_id;
 	res.render('users/register', { id });
 });
 
+//Post user register information to database
 router.post('/register', async (req, res) => {
 	const { firstName, lastName, email, phoneNumber, password } = req.body;
 	const hashedPassword = await bcrypt.hash(password, 12);
@@ -60,11 +64,13 @@ router.post('/register', async (req, res) => {
 	res.redirect('/');
 });
 
+//Get login page
 router.get('/login', (req, res) => {
 	const id = req.session.user_id;
 	res.render('users/login', { id });
 });
 
+//Post login information
 router.post('/login', async (req, res) => {
 	const { email, password } = req.body;
 	const user = await User.findOne({ email: email });
@@ -72,7 +78,7 @@ router.post('/login', async (req, res) => {
 	//this returns true or false
 	const validPassword = await bcrypt.compare(password, user.password);
 	if (validPassword) {
-		// save user id to session if successfully logged in
+		//Save user id to session if successfully logged in
 		req.session.user_id = user._id;
 		const userId = req.session.user_id
 		const cart = await Cart.find({ customerId: userId });
@@ -84,6 +90,7 @@ router.post('/login', async (req, res) => {
 	}
 });
 
+//Get cart for user
 router.get('/cart', async (req, res) => {
 	const id = req.session.user_id;
 	const user = await User.findById(id)
@@ -93,7 +100,6 @@ router.get('/cart', async (req, res) => {
 	}
 	if (id && cart) {
 		const cartItems = cart[0].cartItems;
-		console.log(cartItems, 'CARTITEMSSSSS')
 		res.render('users/cart', { cart, cartItems, id, user });
 	}
 	if (!id) {
@@ -102,6 +108,7 @@ router.get('/cart', async (req, res) => {
 
 });
 
+//Get checkout page
 router.get('/checkout', async (req, res) => {
 	const id = req.session.user_id;
 	const user = await User.findById(id)
@@ -110,12 +117,14 @@ router.get('/checkout', async (req, res) => {
 	res.render('users/checkout', { user, cartItems, id, cart })
 })
 
+//Post to checkout 
 router.post('/checkout', async (req, res) => {
 	const id = req.session.user_id;
+	const user = await User.findById(id);
 	const cart = await Cart.find({ customerId: id }).populate('cartItems.topping')
 	const cartItems = cart[0].cartItems;
 
-
+	//Calculating drink total based on selections to post to orders
 	let subTotal = 0;
 	cartItems.forEach(function (item) {
 		let toppingsPrice = [];
@@ -134,18 +143,24 @@ router.post('/checkout', async (req, res) => {
 	for (item of cartItems) {
 		checkoutArr.push(item)
 	}
-	console.log('CHECKOUTARR-------', checkoutArr)
 
+	//Generate random order number
+	let orderId = Math.random().toString(36).slice(2)
+
+	//Create order
 	await Order.create({
 		customerId: id,
+		orderId: orderId,
 		orderItems: checkoutArr,
 		total: total
 	})
+
+	//Empty cart once items are posted to orders
 	await Cart.findOneAndDelete({ customerId: id })
-	res.render('users/orderComplete')
+	res.render('users/orderComplete', { user, id, orderId })
 })
 
-
+//Get previous orders for a user
 router.get('/orders', async (req, res) => {
 	const id = req.session.user_id;
 	const user = await User.findById(id);
@@ -153,44 +168,12 @@ router.get('/orders', async (req, res) => {
 	res.render('users/orderHistory', { pastOrders, id, user })
 })
 
-router.get('/cart/:drinkId/edit', async (req, res) => {
-	const id = req.session.user_id;
-	const { drinkId } = req.params;
-	const toppings = await Topping.find();
-	const milks = await Milk.find();
-	const sizes = await Size.find();
-	const user = await User.findById(id);
-	const drink = await Menu.findById(drinkId);
-	res.render('users/edit', { drink, id, user, toppings, milks, sizes });
-});
-
-router.put('/cart/:drinkId/edit', async (req, res) => {
-	const id = req.session.user_id;
-	const { drinkId } = req.params;
-	const milk = await Milk.find({ milkName: req.body.milkType });
-	const size = await Size.find({ size: req.body.size });
-	const topping = await Topping.find({ toppingName: req.body.topping });
-	let cart = await Cart.findOneAndUpdate({ customerId: id, 'cartItems.drinkId': drinkId }, {
-		$set: {
-			cartItems: [{
-				'cartItems.$.drinkId': drinkId,
-				'cartItems.$.quantity': req.body.quantity,
-				'cartItems.$.size': size,
-				'cartItems.$.sugarLevel': req.body.sugarLevel,
-				'cartItems.$.iceLevel': req.body.iceLevel,
-				'cartItems.$.milkType': milk,
-				'cartItems.$.topping': topping
-			}]
-		},
-	}, { new: true })
-	await cart.save();
-	res.redirect('/')
-})
-
+//delete drink from cart
 router.post('/cart/:drinkId/edit', async (req, res) => {
 	res.redirect('/menu');
 });
 
+//logout of user account
 router.post('/logout', (req, res) => {
 	req.session.user_id = null;
 	res.redirect('/');

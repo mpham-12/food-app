@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models/users');
 
+//Redirect to menu page
 router.get('/', async (req, res) => {
   res.redirect('menu');
 });

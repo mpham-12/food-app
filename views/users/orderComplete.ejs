@@ -1,14 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
 
-  <H1>THANK YOU FOR YOUR ORDER</H1>
-  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400&display=swap" rel="stylesheet">
+
+<!-- Stylesheets -->
+  <link rel="stylesheet" href="/styles/orderComplete.css">
+  <link rel="stylesheet" href="/styles/navbar.css">
+
+  <title>Milkies</title>
+</head>
+
+<body class="thank-you-body">
+
+  <%- include('../partials/navbar.ejs') %>
+
+<div class="thank-you">
+  <H1 class="thank-you-text">Thank you for your order <%=user.firstName %>!</H1>
+  <h2>Your order ID is: <%= orderId %></h2>
+  <p>Pick-up estimate 5-15 min(s)</p>
+  <a class="menu-back" href="/menu">Go Back to Menu</a>
+</div>
 </body>
+
 </html>

@@ -27,6 +27,9 @@
 <h2>You have no previous orders. Start your order <a href="/menu">here</a></h2>
   <%} else {%>
   <% for (let order of pastOrders){ %>
+    <div>
+      Order ID: <%= order.orderId%>
+    </div>
     <div>   
       <%=order.orderedAt%>
     </div>

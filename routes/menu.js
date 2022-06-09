@@ -7,6 +7,7 @@ const Topping = require('../models/topping');
 const Milk = require('../models/milk');
 const Size = require('../models/size');
 
+//Get menu page
 router.get('/', async (req, res) => {
 	const id = req.session.user_id;
 	const user = await User.findById(id);
@@ -14,12 +15,14 @@ router.get('/', async (req, res) => {
 	res.render('menu', { menuItems, id, user });
 });
 
+//Delete drink from database
 router.post('/:drinkId/delete', async (req, res) => {
 	const { drinkId } = req.params;
 	await Menu.findByIdAndDelete(drinkId);
 	res.redirect('/menu')
 });
 
+//Get individual drink page
 router.get('/:drinkId', async (req, res) => {
 	const id = req.session.user_id;
 	const toppings = await Topping.find();
@@ -32,6 +35,7 @@ router.get('/:drinkId', async (req, res) => {
 	res.render('menu/show', { drink, id, user, toppings, milks, sizes });
 });
 
+//Add drink to cart
 router.post('/:drinkId', async (req, res) => {
 	const id = req.session.user_id;
 	const { drinkId } = req.params;
@@ -40,6 +44,8 @@ router.post('/:drinkId', async (req, res) => {
 	const topping = await Topping.find({toppingName: req.body.topping});
 	const drink = await Menu.findById(drinkId);
 	let cart = await Cart.findOne({ customerId: id });
+
+	//If user has an existing cart, push new drink into cart
 	if (cart) {
 		cart.cartItems.push({
 			drinkName: drink.drinkName,
@@ -54,8 +60,10 @@ router.post('/:drinkId', async (req, res) => {
 		});
 		await cart.save();
 		res.redirect('/menu');
+
+		//If user does not have an existing cart, create one and add drink
 	} else {
-		const newCart = await Cart.create({
+		await Cart.create({
 			customerId: id,
 			cartItems: [
 				{
@@ -75,20 +83,21 @@ router.post('/:drinkId', async (req, res) => {
 	}
 });
 
-router.get('/:drinkId/edit', async (req, res) => {
+//Get edit page for admin
+router.get('/admin/:drinkId/edit', async (req, res) => {
 	const id = req.session.user_id;
 	const { drinkId } = req.params;
 	const user = await User.findById(id);
 	const drink = await Menu.findById(drinkId);
 	if (id && user.isAdmin) {
-		console.log('DRINK--------', drink);
 		res.render('admin/edit', { drink, id, user });
 	} else {
-		res.send('you cannot perform this action');
+		res.redirect('back');
 	}
 });
 
-router.post('/:drinkId/edit', async (req, res) => {
+//Post edited drink details to database
+router.post('/admin/:drinkId/edit', async (req, res) => {
 	const id = req.session.user_id;
 	const { drinkId } = req.params;
 	const user = await User.findById(id);
@@ -97,11 +106,7 @@ router.post('/:drinkId/edit', async (req, res) => {
 		await Menu.findByIdAndUpdate(drinkId, { ...req.body });
 		await drink.save();
 		res.redirect(`/menu/${drink._id}`);
-	} else {
-		res.send('you cannot perform this action');
 	}
 });
-
-
 
 module.exports = router;
