@@ -1,0 +1,15 @@
+body {
+  margin: 0px;
+}
+
+.error-h1 {
+  font-family: 'Noto Sans JP', sans-serif;
+  text-align: center;
+  padding-top: 80px;
+}
+
+.error-h2 {
+  font-family: 'Noto Sans JP', sans-serif;
+  text-align: center;
+  font-weight: 300;
+}

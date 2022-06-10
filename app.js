@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const engine = require('ejs-mate');
 const session = require('express-session');
 const dotenv = require("dotenv");
+const User = require('./models/users');
 const PORT = 3000;
 
 dotenv.config();
@@ -52,8 +53,10 @@ app.use('/menu', menuRoute)
 app.use('/user', userRoute);
 app.use('/admin', adminRoute);
 
-app.all('*', (req, res, next) => {
-res.redirect('back')
+app.all('*', async (req, res, next) => {
+	const id = req.session.user_id;
+	const user = await User.findById(id);
+res.render('users/404', {id, user})
 });
 
 // listening for port connection

@@ -20,7 +20,7 @@ input{
   text-indent: 10px;
 }
 
-button{
+.login-btn{
   width: 358px;
   height: 40px;
   margin-top: 10px;
