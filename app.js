@@ -52,6 +52,10 @@ app.use('/menu', menuRoute)
 app.use('/user', userRoute);
 app.use('/admin', adminRoute);
 
+app.all('*', (req, res, next) => {
+res.redirect('back')
+});
+
 // listening for port connection
 app.listen(PORT, () => {
   console.log(`SERVING ON PORT ${PORT}`);
