@@ -18,6 +18,10 @@
   background-color: transparent;
 }
 
+.delete-btn:hover{
+  cursor: pointer;
+}
+
 .card-text {
   font-weight: 300;
 }
@@ -27,9 +31,17 @@
   margin-top: 50px;
 }
 
+h5.card-title{
+  margin: 0;
+  font-size: 18px;
+}
+
 .card {
   background-color: #f5f5f5;
   border: none;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 15px;
 }
 
 .card-body{

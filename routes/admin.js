@@ -28,16 +28,13 @@ router.get('/new', async (req, res) => {
 
 //Post new drink
 router.post('/new', async (req, res) => {
-	const { drinkName, size, image, description, sugarLevel, iceLevel, milkType, toppings, price } = req.body;
+	const { drinkName, image, description, sugarLevel, iceLevel, price } = req.body;
 	const drink = new Menu({
 		drinkName,
-		size,
 		image,
 		description,
 		sugarLevel,
 		iceLevel,
-		milkType,
-		toppings,
 		price
 	});
 	await drink.save();

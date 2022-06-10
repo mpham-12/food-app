@@ -3,10 +3,6 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const User = require('../models/users');
 const Cart = require('../models/cart');
-const Menu = require('../models/menu');
-const Topping = require('../models/topping');
-const Milk = require('../models/milk');
-const Size = require('../models/size');
 const Order = require('../models/orders');
 
 //Get user profile information
@@ -26,7 +22,6 @@ router.put('/', async (req, res) => {
 	const newFirstName = req.body.firstName
 	const newLastName = req.body.lastName
 	const newNumber = req.body.phoneNumber
-
 	if (!newLastName && !newNumber && newFirstName.length >= 1) {
 		await User.findByIdAndUpdate(id, { $set: { firstName: newFirstName } });
 	}
@@ -56,7 +51,6 @@ router.post('/register', async (req, res) => {
 		phoneNumber,
 		password: hashedPassword
 	});
-	console.log(req.body);
 	await user.save();
 	// apply session to user id so that the user
 	// does not need to log in seperately after registering
@@ -81,10 +75,8 @@ router.post('/login', async (req, res) => {
 		//Save user id to session if successfully logged in
 		req.session.user_id = user._id;
 		const userId = req.session.user_id
-		const cart = await Cart.find({ customerId: userId });
+		await Cart.find({ customerId: userId });
 		res.redirect('/');
-		console.log('logged in as:', user);
-		console.log('USER CART', cart);
 	} else {
 		res.redirect('/user/login');
 	}
@@ -105,7 +97,6 @@ router.get('/cart', async (req, res) => {
 	if (!id) {
 		res.render('users/cart', { cart, id, user });
 	}
-
 });
 
 //Get checkout page
@@ -144,7 +135,7 @@ router.post('/checkout', async (req, res) => {
 		checkoutArr.push(item)
 	}
 
-	//Generate random order number
+	//Generate random order ID
 	let orderId = Math.random().toString(36).slice(2)
 
 	//Create order
@@ -168,15 +159,20 @@ router.get('/orders', async (req, res) => {
 	res.render('users/orderHistory', { pastOrders, id, user })
 })
 
-//delete drink from cart
-router.post('/cart/:drinkId/edit', async (req, res) => {
-	res.redirect('/menu');
+//Delete drink from cart
+router.post('/cart', async (req, res) => {
+	// await Cart.findOneAndDelete(req.body.drinkId)
+	const id = req.session.user_id;
+	await Cart.findOneAndUpdate({customerId : id}, { $pull: { cartItems : {drinkId: req.body.drinkId}}})
+	res.redirect('/user/cart');
 });
 
-//logout of user account
+//Logout of user account
 router.post('/logout', (req, res) => {
 	req.session.user_id = null;
 	res.redirect('/');
 });
+
+
 
 module.exports = router;

@@ -31,7 +31,6 @@ router.get('/:drinkId', async (req, res) => {
 	const user = await User.findById(id);
 	const { drinkId } = req.params;
 	const drink = await Menu.findById(drinkId);
-	console.log('drink', drink)
 	res.render('menu/show', { drink, id, user, toppings, milks, sizes });
 });
 

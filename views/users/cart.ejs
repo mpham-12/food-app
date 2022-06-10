@@ -6,13 +6,6 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Bootstrap -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-    crossorigin="anonymous"></script>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,10 +33,8 @@
             <a class="back" href="/menu">Return to Menu</a>
           </div>
           <% } %>
-
             <% if (id && cart.length>0) {%>
               <section class="cart">
-
                 <h2 id="order-title">Review Your Order</h2>
                 <% for (let item of cartItems) {%>
                   <div class="card mb-3" style="max-width: 540px;">
@@ -59,11 +50,11 @@
                                 <%=item.iceLevel%>,
                                   <%=item.sugarLevel%> Sugar,
 
-                                  <% let toppingNames=[] %>
-                                  <% for (topping of item.topping){ %>
-                                    <% toppingNames.push(topping.toppingName) %>
-                                      <% }%>
-                                        <%=toppingNames.join(', ')%>
+                                    <% let toppingNames=[] %>
+                                      <% for (topping of item.topping){ %>
+                                        <% toppingNames.push(topping.toppingName) %>
+                                          <% }%>
+                                            <%=toppingNames.join(', ')%>
 
                           </p>
                           <div class="total">
@@ -81,7 +72,8 @@
                                         Total: $<%=(drinkTotal*1.13).toFixed(2)%>
                           </div>
 
-                  <form action="/user/cart/delete" method="POST">
+                  <form action="/user/cart" method="POST">
+                    <input type="hidden" name="drinkId" value="<%=item.drinkId%>">
                     <button class="delete-btn">Remove</button>
                   </form>
                         </div>
