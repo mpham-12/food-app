@@ -51,6 +51,7 @@ router.post('/register', async (req, res) => {
 		phoneNumber,
 		password: hashedPassword
 	});
+	
 	await user.save();
 	// apply session to user id so that the user
 	// does not need to log in seperately after registering
@@ -106,7 +107,7 @@ router.get('/checkout', async (req, res) => {
 	const cart = await Cart.find({ customerId: id }).populate('cartItems.topping');
 	const cartItems = cart[0].cartItems;
 	res.render('users/checkout', { user, cartItems, id, cart })
-})
+});
 
 //Post to checkout 
 router.post('/checkout', async (req, res) => {
@@ -144,12 +145,12 @@ router.post('/checkout', async (req, res) => {
 		orderId: orderId,
 		orderItems: checkoutArr,
 		total: total
-	})
+	});
 
 	//Empty cart once items are posted to orders
 	await Cart.findOneAndDelete({ customerId: id })
 	res.render('users/orderComplete', { user, id, orderId })
-})
+});
 
 //Get previous orders for a user
 router.get('/orders', async (req, res) => {
@@ -157,11 +158,10 @@ router.get('/orders', async (req, res) => {
 	const user = await User.findById(id);
 	const pastOrders = await Order.find({ customerId: id })
 	res.render('users/orderHistory', { pastOrders, id, user })
-})
+});
 
 //Delete drink from cart
 router.post('/cart', async (req, res) => {
-	// await Cart.findOneAndDelete(req.body.drinkId)
 	const id = req.session.user_id;
 	await Cart.findOneAndUpdate({customerId : id}, { $pull: { cartItems : {drinkId: req.body.drinkId}}})
 	res.redirect('/user/cart');

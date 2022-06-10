@@ -1,52 +1,35 @@
-<!-- <nav>
-  <div class="section">
-    <a class="nav-link" href="/menu">MENU</a>
-  </div>
+<nav class="topnav">
+  <div class="dropdown">
+    <button class="dropbtn">MENU</button>
+
+    <div class="dropdown-content">
+
+
+    <div class="menu-text"><a class="menu-item" href="/menu">OUR DRINKS</a></div>
+    <% if (id && !user.isAdmin){ %>
+      <a href="/user">MY ACCOUNT</a>
+      <% } %>
+      <% if (id && user.isAdmin){ %>
+        <a href="/admin">ADMIN</a>
+        <% } %>
+        <%if(!id){%>
+          <a href="/user/login">LOGIN</a>
+          <%} else {%>
+              <form action="/user/logout" method="POST">
+                <button class="logout-btn">LOGOUT</button>
+              </form>
+            <%}%>
   
-  <div class="section section-logo">
-  <a href="/"><img class='navbar-logo' src="/images/logo.png" alt=""></a>
-</div>
-  <% if (id && !user.isAdmin){ %> 
-  <div class="section section-end">
-    <a class="nav-link" href="/user/cart">CART</a>
-    <a class="nav-link" href="/user">MY ACCOUNT</a>
-    <% } %> 
-    <% if (id && user.isAdmin){ %> 
-      <a class="nav-link" href="/admin">ADMIN</a>
-    <% } %> 
-    <%if(!id){%>
-      <a class="nav-link" href="/user/login">LOGIN</a>
-      <%} else {%>
-        <form action="/user/logout" method="POST">
-          <button class="logout-btn">LOGOUT</button>
-        </form>
-        <%}%>
-      </div>
-</nav> -->
+          </div>
+          </div>
 
-<nav>
-  <div class="topnav">
-    <div class="menu-left">
-      <a href="/"><img class='navbar-logo' src="/images/logo.png" alt=""></a>
-      <span class="menu-text"><a class="menu-item" href="/menu">MENU</a></span>
-
-    </div>
+  <div class="menu-middle">
+    <a href="/"><img class='navbar-logo' src="/images/logo.png" alt=""></a>
+  </div>
 
     <div class="menu-right">
       <% if (id && !user.isAdmin){ %>
         <a href="/user/cart" class="split">CART</a>
-        <a href="/user" class="split">MY ACCOUNT</a>
         <% } %>
-          <% if (id && user.isAdmin){ %>
-            <a href="/admin" class="split">ADMIN</a>
-            <% } %>
-              <%if(!id){%>
-                <a href="/user/login" class="split">LOGIN</a>
-                <%} else {%>
-                  <form action="/user/logout" method="POST">
-                    <button class="split">LOGOUT</button>
-                  </form>
-                  <%}%>
     </div>
-  </div>
 </nav>
