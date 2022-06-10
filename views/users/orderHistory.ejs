@@ -12,7 +12,7 @@
 
       <!-- Stylesheets -->
       <link rel="stylesheet" href="/styles/navbar.css">
-      <link rel="stylesheet" href="/styles/orderHistory.css">
+      <link rel="stylesheet" href="/styles/adminOrders.css">
 
   <title>Milkies</title>
 
@@ -20,20 +20,27 @@
 </head>
 <%- include('../partials/navbar.ejs') %>
 <body>
+
+  <section class="order-con">
   
   <h1>ORDER HISTORY</h1>
 
-  <div class="order-his">
-  <%if (pastOrders.length===0){%>
+  <section class="order">
+
+    <%if (pastOrders.length===0){%>
 <h2>You have no previous orders. Start your order <a href="/menu">here</a></h2>
   <%} else {%>
-  <% for (let order of pastOrders){ %>
-    <div>
-      Order ID: <%= order.orderId%>
+  <% for (let order of pastOrders.reverse()){ %>
+    <div class="order-detail" id="order-deets">
+      <span>Order ID:</span>
+      <%= order.orderId%>
     </div>
-    <div>   
-      <%=order.orderedAt%>
+    <div class="order-detail">   
+      <span>Ordered At:</span>
+      <%=order.orderedAt.toString().slice(0, -32)%>
     </div>
+    <div class="order-detail">
+      <p>Order:</p>
     <%for (let drink of order.orderItems) {%>
       <%=drink.quantity%> x <%=drink.drinkName%>
       <%=drink.size[0].size%>,  <%=drink.milkType[0].milkName%>, <%=drink.sugarLevel%> Sugar, <%=drink.iceLevel%>,
@@ -43,14 +50,17 @@
         <% toppingsArr.push(topping.toppingName)%>
         <% }%>
         <%=toppingsArr.join(", ")%>
-<div>
-
 </div>
+
     <% } %>
-    Total: <%=order.total%>
+    <div>
+    <span class="total">Total:</span>  <%=order.total%>
+  </div>
     <% } %>
     <% } %>
     
-  </div>
+</section>
+</section>
+
 </body>
 </html>
