@@ -6,24 +6,25 @@ const User = require('../models/users');
 const Topping = require('../models/topping');
 const Milk = require('../models/milk');
 const Size = require('../models/size');
+const {catchAsync} = require('../helpers');
 
 //Get menu page
-router.get('/', async (req, res) => {
+router.get('/', catchAsync(async (req, res) => {
 	const id = req.session.user_id;
 	const user = await User.findById(id);
 	const menuItems = await Menu.find();
 	res.render('menu', { menuItems, id, user });
-});
+}));
 
 //Delete drink from database
-router.post('/:drinkId/delete', async (req, res) => {
+router.post('/:drinkId/delete', catchAsync(async (req, res) => {
 	const { drinkId } = req.params;
 	await Menu.findByIdAndDelete(drinkId);
 	res.redirect('/menu')
-});
+}));
 
 //Get individual drink page
-router.get('/:drinkId', async (req, res) => {
+router.get('/:drinkId', catchAsync(async (req, res) => {
 	const id = req.session.user_id;
 	const toppings = await Topping.find();
 	const milks = await Milk.find();
@@ -32,10 +33,10 @@ router.get('/:drinkId', async (req, res) => {
 	const { drinkId } = req.params;
 	const drink = await Menu.findById(drinkId);
 	res.render('menu/show', { drink, id, user, toppings, milks, sizes });
-});
+}));
 
 //Add drink to cart
-router.post('/:drinkId', async (req, res) => {
+router.post('/:drinkId', catchAsync(async (req, res) => {
 	const id = req.session.user_id;
 	const { drinkId } = req.params;
 	const milk = await Milk.find({milkName: req.body.milkType});
@@ -80,10 +81,10 @@ router.post('/:drinkId', async (req, res) => {
 		});
 		res.redirect('/menu');
 	}
-});
+}));
 
 //Get edit page for admin
-router.get('/admin/:drinkId/edit', async (req, res) => {
+router.get('/admin/:drinkId/edit', catchAsync(async (req, res) => {
 	const id = req.session.user_id;
 	const { drinkId } = req.params;
 	const user = await User.findById(id);
@@ -93,10 +94,10 @@ router.get('/admin/:drinkId/edit', async (req, res) => {
 	} else {
 		res.redirect('back');
 	}
-});
+}));
 
 //Post edited drink details to database
-router.post('/admin/:drinkId/edit', async (req, res) => {
+router.post('/admin/:drinkId/edit', catchAsync(async (req, res) => {
 	const id = req.session.user_id;
 	const { drinkId } = req.params;
 	const user = await User.findById(id);
@@ -106,6 +107,6 @@ router.post('/admin/:drinkId/edit', async (req, res) => {
 		await drink.save();
 		res.redirect(`/menu/${drink._id}`);
 	}
-});
+}));
 
 module.exports = router;
