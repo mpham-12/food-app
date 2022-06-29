@@ -6,7 +6,7 @@ Milkies is a Node Express app allowing users to order bubble tea for pick up.
 
 Users can register for an account with their first name, last name, phone number, and email. Users can then select the drinks, customize them, and place an order for pick up. Users have access to all of their past order information. Users can also edit/customize their profile information.
 
-!["login page"](https://github.com/mpham-12/food-app/blob/main/docs/order.png)
+!["login page"](https://github.com/mpham-12/food-app/blob/main/docs/login.png)
 !["order page"](https://github.com/mpham-12/food-app/blob/main/docs/order.png)
 !["cart page"](https://github.com/mpham-12/food-app/blob/main/docs/cart.png)
 !["order history page"](https://github.com/mpham-12/food-app/blob/main/docs/order%20history.png)
