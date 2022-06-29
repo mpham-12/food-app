@@ -40,4 +40,4 @@ Admin can create, edit, and delete drinks. Admin also has access to order histor
 
 Install all dependencies (using the npm install command). 
 <br />
-Run the development web server using the nodmon command.
+Run the development web server using the nodemon command.
