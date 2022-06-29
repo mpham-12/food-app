@@ -19,22 +19,22 @@ Admin can create, edit, and delete drinks. Admin also has access to order histor
 
 ## Future developments
 
-Deployment
-Stripe for pre-payment
-Twilio for SMS updates
+- Deployment
+- Stripe for pre-payment
+- Twilio for SMS updates
 
 ## Dependencies
 
-Ajax
-Bceypt
-Connect-flash
-Dotenv
-EJS
-Express
-Express-session
-Method-override
-Mongoose
-Nodemon
+- Ajax
+- Bcrypt
+- Connect-flash
+- Dotenv
+- EJS
+- Express
+- Express-session
+- Method-override
+- Mongoose
+- Nodemon
 
 ## Getting Started
 
