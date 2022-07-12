@@ -2,6 +2,7 @@
     margin:0;
     font-family: 'Noto Sans JP', sans-serif;
 }
+
 .checkout{
   display: flex;
   flex-direction: column;
@@ -18,14 +19,12 @@
 }
 
 .checkout-item {
-  /* border: 1px solid black; */
   padding: 20px;
- align-self: flex-start;
+  align-self: flex-start;
 }
 .store-info {
-  /* border: 1px solid black; */
   padding: 20px;
- align-self: flex-start;
+  align-self: flex-start;
 }
 
 .address {
@@ -73,12 +72,11 @@ a{
 }
 
 @media only screen and (max-width: 600px) {
-.checkout-info{
-  width: 90%;
-}
-
-.total-info{
-  width: 90%;
-
-}
+  .checkout-info{
+    width: 90%;
   }
+
+  .total-info{
+   width: 90%;
+  }
+}

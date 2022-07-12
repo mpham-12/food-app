@@ -10,7 +10,6 @@ const ToppingSchema = new Schema({
 		type: Number,
 		required: true
 	}
-
 });
 
 module.exports = mongoose.model('Topping', ToppingSchema);

@@ -1,8 +1,8 @@
 .account-body{
   margin:0;
   font-family: 'Noto Sans JP', sans-serif;
-
 }
+
 h1{
 text-align: center;
 }
@@ -16,10 +16,12 @@ text-align: center;
 .info{
   width: 30%;
 }
+
 input{
   padding: 5px;
   width: 300px;
 }
+
 .input{
   display: flex;
   justify-content: space-between;
@@ -31,22 +33,24 @@ section.info{
   width: 500px;
 }
 
-
 .input-field{
   width: 90%;
 }
+
 #first_name_input{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   margin-bottom: 20px;
 }
+
 #last_name_input{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   margin-bottom: 20px;
 }
+
 #phone-number_input{
   display: flex;
   flex-direction: row;
@@ -64,6 +68,7 @@ section.info{
   text-align: center;
   margin-right: 0px;
 }
+
 .update-last_name{
   font-family: 'Noto Sans JP', sans-serif;
   width: 80px;
@@ -74,6 +79,7 @@ section.info{
   text-align: center;
   margin-right: 0px;
 }
+
 .update-phone_number{
   font-family: 'Noto Sans JP', sans-serif;
   width: 80px;
@@ -84,6 +90,7 @@ section.info{
   text-align: center;
   margin-right: 0px;
 }
+
 #edit-first_name{
   font-family: 'Noto Sans JP', sans-serif;
   width: 73px;
@@ -96,6 +103,7 @@ section.info{
   margin-right: 0px;
   margin-left: 200px;
 }
+
 #edit-last_name{
   font-family: 'Noto Sans JP', sans-serif;
   width: 73px;
@@ -108,6 +116,7 @@ section.info{
   margin-right: 0px;
   margin-left: 200px;
 }
+
 #edit-phone_number{
   font-family: 'Noto Sans JP', sans-serif;
   width: 73px;
@@ -120,14 +129,17 @@ section.info{
   margin-right: 0px;
   margin-left: 200px;
 }
+
 .edit-below{
   font-size: 20px;
 }
+
 .past-orders{
   margin: 50px 0px;
   display: flex;
   justify-content: center;
 }
+
 .past-orders-link{
   text-decoration: none;
   margin-top: 10px;
@@ -140,10 +152,10 @@ section.info{
   font-weight: 300;
   margin-bottom: 80px;
 }
+
 .past-orders-link:hover{
 color: white;
 }
-
 
 .btn-con{
   display: flex;
@@ -158,53 +170,53 @@ color: white;
 #firstName{
   width: 80%;
 }
+
 #lastName{
   width: 80%;
 }
+
 #phoneNumber{
   width: 80%;
 }
+
 @media only screen and (max-width: 600px) {
-.profile{
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+  .profile{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .info{
+    width: 70%;
+    padding: 0px 20px;
+  }
+
+  #edit-first_name{
+    min-width: 73px;
+    height: 30px;
+    margin-left: 0;
+  }
+  #edit-last_name{
+    min-width: 73px;
+    height: 30px;
+    margin-left: 0;
+
+  }
+  #edit-phone_number{
+    min-width: 73px;
+    height: 30px;
+    margin-left: 0;
+
+  }
+
+  .first_name_input{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .input-tag{
+    font-size: 15px;
+    width: 90%;
+  }
 }
-
-.info{
-  width: 70%;
-  padding: 0px 20px;
-}
-
-#edit-first_name{
-  min-width: 73px;
-  height: 30px;
-  margin-left: 0;
-}
-#edit-last_name{
-  min-width: 73px;
-  height: 30px;
-  margin-left: 0;
-
-}
-#edit-phone_number{
-  min-width: 73px;
-  height: 30px;
-  margin-left: 0;
-
-}
-
-.first_name_input{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-
-
-.input-tag{
-  font-size: 15px;
-  width: 90%;
-}
-
-    }

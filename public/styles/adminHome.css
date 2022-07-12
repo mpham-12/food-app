@@ -1,7 +1,6 @@
 .admin-body{
 margin: 0;
 font-family: 'Noto Sans JP', sans-serif;
-
 }
 
 h1{
@@ -19,7 +18,6 @@ h1{
 .links-con{
   display: flex;
   flex-direction: column;
-  /* border: 1px solid black; */
   padding: 20px;
 }
 
@@ -38,6 +36,5 @@ h1{
 
 .link:hover{
   color: rgb(80, 167, 145);
-
 }
 

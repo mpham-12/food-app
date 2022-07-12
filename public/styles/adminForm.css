@@ -30,7 +30,6 @@ input{
   border: 1px solid rgb(198, 198, 198);
   text-indent: 10px;
   margin-bottom: 10px;
-
 }
 
 textarea{
@@ -40,7 +39,6 @@ textarea{
   border: 1px solid rgb(198, 198, 198);
   margin-top: 10px;
   margin-bottom: 10px;
-
 }
 
 select{
@@ -76,13 +74,13 @@ label{
   form{
     width: 90%;
   }
-input{
-  width: 95%;
-}
-textarea{
-  width: 95%;
-}
-select{
-  width: 95%;
-}
+  input{
+    width: 95%;
+  }
+  textarea{
+    width: 95%;
+  }
+  select{
+    width: 95%;
+  }
 }

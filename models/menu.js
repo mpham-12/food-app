@@ -8,12 +8,12 @@ const MenuSchema = new Schema({
 	},
 	sugarLevel: {
 		type: String,
-		enum: ['0%', '30%', '50%', '80%', '100%'],
+		enum: [ '0%', '30%', '50%', '80%', '100%' ],
 		required: true
 	},
 	iceLevel: {
 		type: String,
-		enum: ['No Ice', 'Less Ice', 'Regular Ice', 'Extra Ice'],
+		enum: [ 'No Ice', 'Less Ice', 'Regular Ice', 'Extra Ice' ],
 		required: true
 	},
 	price: {

@@ -8,105 +8,25 @@ const Milk = require('../models/milk');
 const Size = require('../models/size');
 const {catchAsync} = require('../helpers');
 
-//Get menu page
-router.get('/', catchAsync(async (req, res) => {
-	const id = req.session.user_id;
-	const user = await User.findById(id);
-	const menuItems = await Menu.find();
-	res.render('menu', { menuItems, id, user });
-}));
+//import from menu controller
+const drinkMenu = require('../controllers/menu');
 
-//Delete drink from database
-router.post('/:drinkId/delete', catchAsync(async (req, res) => {
-	const { drinkId } = req.params;
-	await Menu.findByIdAndDelete(drinkId);
-	res.redirect('/menu')
-}));
+//Get menu page
+router.get('/', catchAsync(drinkMenu.getMenu));
+
+//Delete drink from database******************* NOT WORKING
+router.delete('/:drinkId', catchAsync(drinkMenu.deleteDrinkFromDb));
 
 //Get individual drink page
-router.get('/:drinkId', catchAsync(async (req, res) => {
-	const id = req.session.user_id;
-	const toppings = await Topping.find();
-	const milks = await Milk.find();
-	const sizes = await Size.find();
-	const user = await User.findById(id);
-	const { drinkId } = req.params;
-	const drink = await Menu.findById(drinkId);
-	res.render('menu/show', { drink, id, user, toppings, milks, sizes });
-}));
+router.get('/:drinkId', catchAsync(drinkMenu.getDrink));
 
 //Add drink to cart
-router.post('/:drinkId', catchAsync(async (req, res) => {
-	const id = req.session.user_id;
-	const { drinkId } = req.params;
-	const milk = await Milk.find({milkName: req.body.milkType});
-	const size = await Size.find({size: req.body.size});
-	const topping = await Topping.find({toppingName: req.body.topping});
-	const drink = await Menu.findById(drinkId);
-	let cart = await Cart.findOne({ customerId: id });
-
-	//If user has an existing cart, push new drink into cart
-	if (cart) {
-		cart.cartItems.push({
-			drinkName: drink.drinkName,
-			drinkId: drinkId,
-			quantity: req.body.quantity,
-			size: size,
-			sugarLevel: req.body.sugarLevel,
-			iceLevel: req.body.iceLevel,
-			milkType: milk,
-			topping: topping,
-			image: drink.image
-		});
-		await cart.save();
-		res.redirect('/menu');
-
-		//If user does not have an existing cart, create one and add drink
-	} else {
-		await Cart.create({
-			customerId: id,
-			cartItems: [
-				{
-					drinkName: drink.drinkName,
-					drinkId: drinkId,
-					quantity: req.body.quantity,
-					size: size,
-					sugarLevel: req.body.sugarLevel,
-					iceLevel: req.body.iceLevel,
-					milkType: milk,
-					topping: topping,
-					image: drink.image
-				}
-			]
-		});
-		res.redirect('/menu');
-	}
-}));
+router.post('/:drinkId', catchAsync(drinkMenu.addToCart));
 
 //Get edit page for admin
-router.get('/admin/:drinkId/edit', catchAsync(async (req, res) => {
-	const id = req.session.user_id;
-	const { drinkId } = req.params;
-	const user = await User.findById(id);
-	const drink = await Menu.findById(drinkId);
-	if (id && user.isAdmin) {
-		res.render('admin/edit', { drink, id, user });
-	} else {
-		res.redirect('back');
-	}
-}));
+router.get('/admin/:drinkId/edit', catchAsync(drinkMenu.adminEdit));
 
 //Post edited drink details to database
-router.post('/admin/:drinkId/edit', catchAsync(async (req, res) => {
-	const id = req.session.user_id;
-	const { drinkId } = req.params;
-	const user = await User.findById(id);
-	const drink = await Menu.findById(drinkId);
-	if (id && user.isAdmin) {
-		await Menu.findByIdAndUpdate(drinkId, { ...req.body });
-		await drink.save();
-		res.redirect(`/menu/${drink._id}`);
-	}
-}));
+router.post('/admin/:drinkId/edit', catchAsync(drinkMenu.editDrink));
 
 module.exports = router;

@@ -3,56 +3,22 @@ const router = express.Router();
 const User = require('../models/users');
 const Menu = require('../models/menu');
 const Order = require('../models/orders');
-const {catchAsync} = require('../helpers');
+const { catchAsync } = require('../helpers');
+
+//import from controller
+const admin = require('../controllers/admin');
 
 
 //Get admin page
-router.get('/', catchAsync(async (req, res) => {
-	const id = req.session.user_id;
-	const user = await User.findById(id);
-	if (id && user.isAdmin) {
-		res.render('admin/home', {id, user});
-	} else {
-		res.redirect('back')
-	}
-}));
+router.get('/', catchAsync(admin.getAdmin));
 
 //Get new form for creating drinks
-router.get('/new', catchAsync(async (req, res) => {
-	const id = req.session.user_id;
-	const user = await User.findById(id);
-	if (id && user.isAdmin) {
-		res.render('admin/new', { id, user });
-	} else {
-		res.redirect('back');
-	}
-}));
+router.get('/new', catchAsync(admin.getNew));
 
 //Post new drink
-router.post('/new', catchAsync(async (req, res) => {
-	const { drinkName, image, description, sugarLevel, iceLevel, price } = req.body;
-	const drink = new Menu({
-		drinkName,
-		image,
-		description,
-		sugarLevel,
-		iceLevel,
-		price
-	});
-	await drink.save();
-	res.redirect(`/menu/${drink._id}`);
-}));
+router.post('/new', catchAsync(admin.postNew));
 
 //Get all customer orders
-router.get('/orders', catchAsync(async (req, res) => {
-	const id = req.session.user_id;
-	const user = await User.findById(id);
-	const orders = await Order.find().populate('customerId')
-	if (id && user.isAdmin) {
-	res.render('admin/orders', { orders, id, user })
- } else {
-	res.redirect('back');
-}
-}));
+router.get('/orders', catchAsync(admin.getAllOrders));
 
 module.exports = router;

@@ -10,7 +10,7 @@
 }
 
 .delete-btn {
- color: #dc3545;
+  color: #dc3545;
   border: none;
   border-radius: 5px;
   margin-top: 10px;
@@ -59,7 +59,7 @@ h2{
 }
 
 .checkout-btn{
-text-decoration: none;
+  text-decoration: none;
   margin-top: 10px;
   background-color: #f0d42c;
   border: 1px solid #f0d42c;
@@ -70,6 +70,7 @@ text-decoration: none;
   font-weight: 300;
   margin-bottom: 80px;
 }
+
 .checkout-btn:hover{
   color: black;
 }
@@ -88,10 +89,10 @@ color: black;
     width: 80%;
     margin: 0px 20px;
   }
-.card-body{
-  width: 100%;
-}
+  .card-body{
+    width: 100%;
+  }
   .card-text{
     width: 90%;
   }
-  }
+}
