@@ -17,7 +17,6 @@ const getMenu = async (req, res) => {
 const deleteDrinkFromDb = async (req, res) => {
 	const { drinkId } = req.params;
 	await Menu.findByIdAndDelete(drinkId);
-	console.log('deleted from menu!!!!!!!!')
 	res.redirect('/menu')
 }
 
