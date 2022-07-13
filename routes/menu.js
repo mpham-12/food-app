@@ -1,11 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const Menu = require('../models/menu');
-const Cart = require('../models/cart');
-const User = require('../models/users');
-const Topping = require('../models/topping');
-const Milk = require('../models/milk');
-const Size = require('../models/size');
 const {catchAsync} = require('../helpers');
 
 //import from menu controller

@@ -1,4 +1,3 @@
-const express = require('express');
 const Menu = require('../models/menu');
 const Cart = require('../models/cart');
 const User = require('../models/users');

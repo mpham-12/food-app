@@ -1,10 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const bcrypt = require('bcrypt');
-const User = require('../models/users');
-const Cart = require('../models/cart');
-const Order = require('../models/orders');
 const { catchAsync } = require('../helpers');
+
 //import from user controller
 const userInfo = require('../controllers/user');
 

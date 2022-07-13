@@ -1,13 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models/users');
-const Menu = require('../models/menu');
-const Order = require('../models/orders');
 const { catchAsync } = require('../helpers');
 
 //import from controller
 const admin = require('../controllers/admin');
-
 
 //Get admin page
 router.get('/', catchAsync(admin.getAdmin));

@@ -53,6 +53,7 @@ app.use('/menu', menuRoute)
 app.use('/user', userRoute);
 app.use('/admin', adminRoute);
 
+//render 404 page if route doesn't exist
 app.all('*', async (req, res, next) => {
 	const id = req.session.user_id;
 	const user = await User.findById(id);
