@@ -2,6 +2,7 @@ const User = require('../models/users');
 const Menu = require('../models/menu');
 const Order = require('../models/orders');
 
+//Get admin page
 const getAdmin = async (req, res) => {
 	const id = req.session.user_id;
 	const user = await User.findById(id);
@@ -12,6 +13,7 @@ const getAdmin = async (req, res) => {
 	}
 }
 
+//Get new form for creating drinks
 const getNew = async (req, res) => {
 	const id = req.session.user_id;
 	const user = await User.findById(id);
@@ -22,6 +24,7 @@ const getNew = async (req, res) => {
 	}
 }
 
+//Post new drink
 const postNew = async (req, res) => {
 	const { drinkName, image, description, sugarLevel, iceLevel, price } = req.body;
 	const drink = new Menu({
@@ -36,6 +39,7 @@ const postNew = async (req, res) => {
 	res.redirect(`/menu/${drink._id}`);
 }
 
+//Get all customer orders
 const getAllOrders = async (req, res) => {
 	const id = req.session.user_id;
 	const user = await User.findById(id);

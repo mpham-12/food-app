@@ -3,6 +3,7 @@ const User = require('../models/users');
 const Cart = require('../models/cart');
 const Order = require('../models/orders');
 
+//Get user profile information
 const getProfile = async (req, res) => {
 	const id = req.session.user_id;
 	const admin = await User.find({ admin: true });
@@ -13,6 +14,7 @@ const getProfile = async (req, res) => {
 		res.render('users/account', { user, id, admin });
 }
 
+//Edit user information
 const editProfile = async (req, res) => {
 	const id = req.session.user_id;
 	const newFirstName = req.body.firstName
@@ -30,11 +32,13 @@ const editProfile = async (req, res) => {
 	res.status(201).send();
 }
 
+//Get register page
 const getRegister = (req, res) => {
 	const id = req.session.user_id;
 	res.render('users/register', { id });
 }
 
+//Post user register information to database
 const postRegister = async (req, res) => {
     const { firstName, lastName, email, phoneNumber, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, 12);
@@ -53,11 +57,13 @@ const postRegister = async (req, res) => {
   res.redirect('/');
 }
 
+//Get login page
 const getLogin = async (req, res) => {
 	const id = req.session.user_id;
 	res.render('users/login', { id });
 }
 
+//Post login information
 const postLogin = async (req, res) => {
 	const { email, password } = req.body;
 	const user = await User.findOne({ email: email });
@@ -75,6 +81,7 @@ const postLogin = async (req, res) => {
 	}
 }
 
+//Get cart for user
 const getUserCart = async (req, res) => {
 	const id = req.session.user_id;
 	const user = await User.findById(id)
@@ -91,6 +98,7 @@ const getUserCart = async (req, res) => {
 	}
 }
 
+//Get checkout page
 const getCheckout = async (req, res) => {
 	const id = req.session.user_id;
 	const user = await User.findById(id)
@@ -99,6 +107,7 @@ const getCheckout = async (req, res) => {
 	res.render('users/checkout', { user, cartItems, id, cart })
 }
 
+//Post to checkout 
 const postToCheckout = async (req, res) => {
 	const id = req.session.user_id;
 	const user = await User.findById(id);
@@ -141,6 +150,7 @@ const postToCheckout = async (req, res) => {
 	res.render('users/orderComplete', { user, id, orderId })
 }
 
+//Get previous orders for a user
 const getPreviousDrinks = async (req, res) => {
 	const id = req.session.user_id;
 	const user = await User.findById(id);
@@ -148,12 +158,14 @@ const getPreviousDrinks = async (req, res) => {
 	res.render('users/orderHistory', { pastOrders, id, user })
 }
 
+//Delete drink from cart
 const deleteDrink = async (req, res) => {
 	const id = req.session.user_id;
 	await Cart.findOneAndUpdate({ customerId: id }, { $pull: { cartItems: { drinkId: req.body.drinkId } } })
 	res.redirect('/user/cart');
 }
 
+//Logout of user account
 const postLogout = (req, res) => {
 	req.session.user_id = null;
 	res.redirect('/');

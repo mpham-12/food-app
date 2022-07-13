@@ -5,7 +5,7 @@ const Topping = require('../models/topping');
 const Milk = require('../models/milk');
 const Size = require('../models/size');
 
-
+//Get menu page
 const getMenu = async (req, res) => {
 	const id = req.session.user_id;
 	const user = await User.findById(id);
@@ -13,12 +13,14 @@ const getMenu = async (req, res) => {
 	res.render('menu', { menuItems, id, user });
 }
 
+//Delete drink from database (Admin user)
 const deleteDrinkFromDb = async (req, res) => {
 	const { drinkId } = req.params;
 	await Menu.findByIdAndDelete(drinkId);
 	res.redirect('/menu')
 }
 
+//Get individual drink page
 const getDrink = async (req, res) => {
 	const id = req.session.user_id;
 	const toppings = await Topping.find();
@@ -30,12 +32,13 @@ const getDrink = async (req, res) => {
 	res.render('menu/show', { drink, id, user, toppings, milks, sizes });
 }
 
+//Add drink to cart
 const addToCart = async (req, res) => {
 	const id = req.session.user_id;
 	const { drinkId } = req.params;
-	const milk = await Milk.find({milkName: req.body.milkType});
-	const size = await Size.find({size: req.body.size});
-	const topping = await Topping.find({toppingName: req.body.topping});
+	const milk = await Milk.find({ milkName: req.body.milkType });
+	const size = await Size.find({ size: req.body.size });
+	const topping = await Topping.find({ toppingName: req.body.topping });
 	const drink = await Menu.findById(drinkId);
 	let cart = await Cart.findOne({ customerId: id });
 
@@ -77,6 +80,7 @@ const addToCart = async (req, res) => {
 	}
 }
 
+//Get edit page for admin
 const adminEdit = async (req, res) => {
 	const id = req.session.user_id;
 	const { drinkId } = req.params;
@@ -89,6 +93,7 @@ const adminEdit = async (req, res) => {
 	}
 }
 
+//Post edited drink details to database
 const editDrink = async (req, res) => {
 	const id = req.session.user_id;
 	const { drinkId } = req.params;
@@ -103,11 +108,11 @@ const editDrink = async (req, res) => {
 
 // export to admin router
 module.exports = {
-  getMenu,
-  deleteDrinkFromDb,
-  addToCart,
-  adminEdit,
-  getDrink, 
-  editDrink
+	getMenu,
+	deleteDrinkFromDb,
+	addToCart,
+	adminEdit,
+	getDrink,
+	editDrink
 }
 

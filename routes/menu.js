@@ -8,7 +8,7 @@ const drinkMenu = require('../controllers/menu');
 //Get menu page
 router.get('/', catchAsync(drinkMenu.getMenu));
 
-//Delete drink from database******************* NOT WORKING
+//Delete drink from database
 router.delete('/:drinkId', catchAsync(drinkMenu.deleteDrinkFromDb));
 
 //Get individual drink page
