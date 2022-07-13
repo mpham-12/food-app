@@ -27,7 +27,6 @@ const seedSize = [
   }
 ]
 
-
 const seedDB = async () => {
   await Size.deleteMany({});
   await Size.insertMany(seedSize);

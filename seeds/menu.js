@@ -72,7 +72,6 @@ const seedMenu = [
   },
 ]
 
-
 const seedDB = async () => {
   await Menu.deleteMany({});
   await Menu.insertMany(seedMenu);

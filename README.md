@@ -38,6 +38,12 @@ Admin can create, edit, and delete drinks. Admin also has access to order histor
 
 ## Getting Started
 
-Install all dependencies (using the npm install command). 
+Install all dependencies (using the "npm install" command). 
 <br />
-Run the development web server using the nodemon command.
+cd into the "seeds" folder, and seed the database with the following commands:
+- node menu.js
+- node milk.js
+- node size.js
+- node toppings.js
+<br />
+Run the development web server with the "npm start" command.

@@ -36,8 +36,7 @@ const seedToppings = [
 {
   toppingName: 'Pudding',
   price: 0.80
-},
-
+}
 ]
 
 
